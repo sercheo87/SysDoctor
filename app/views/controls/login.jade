@@ -1,0 +1,16 @@
+block js
+  script(type='text/javascript', src='/js/login_validation.js')
+.center-block
+  form#frsignin.form-horizontal(role='form',method='post',autocomplete='off')
+    input(type='hidden', name='_csrf', value=token)
+    .form-group
+      label.col-sm-2.control-label(for='login_user') Usuario:
+      .col-sm-10
+        input#login_user.form-control(type='text', placeholder='Usuario', name='login_user')
+    .form-group
+      label.col-sm-2.control-label(for='login_pass') Password
+      .col-sm-10
+        input#login_pass.form-control(type='password', placeholder='Contraseña', name='login_pass')
+
+    .text-center
+      button#btSignIn.btn.btn-primary(type='button') Ingresar

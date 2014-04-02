@@ -1,0 +1,55 @@
+extends ../site
+
+block content
+  .container.theme-showcase(role='main').col-md-10
+    .page-header
+      h1=title
+    section
+      div.form-horizontal(role='form')
+
+        .form-group
+          legend Informacion General
+        .form-group
+          label.col-sm-2(for='txpatientsname') Nombre
+          .col-sm-10
+            input#txpatientsname.form-control(type='text', placeholder='Nombres del Paciente')
+        .form-group
+          label.col-sm-2(for='txpatientslastname') Apellidos
+          .col-sm-10
+            input#txpatientslastname.form-control(type='text', placeholder='Apellidos del Paciente')
+        .form-group
+          label.col-sm-2(for='txpatientsidentification') Identificacion
+          .col-sm-10
+            input#txpatientsidentification.form-control(type='text', placeholder='Identificacion')
+        .form-group
+          label.col-sm-2(for='txpatientscivilstatus') Estado Civil
+          .col-sm-10
+            input#txpatientscivilstatus.form-control(type='text', placeholder='Estado Civil')
+        .form-group
+          label.col-sm-2(for='txpatientsocupation') Profesion
+          .col-sm-10
+            input#txpatientsocupation.form-control(type='text', placeholder='Profesion')
+
+        .form-group
+          legend Direcciones
+        .form-group
+          label.col-sm-2(for='txpatientscity') Ciudad
+          .col-sm-10
+            input#txpatientscity.form-control(type='text', placeholder='Ciudad')
+        .form-group
+          label.col-sm-2(for='txpatientsaddress') Direccion
+          .col-sm-10
+            input#txpatientsaddress.form-control(type='text', placeholder='Direccion')
+
+        .form-group
+          legend Informacion de Contacto
+        .form-group
+          label.col-sm-2(for='txpatientsphone') Telefono
+          .col-sm-10
+            input#txpatientsphone.form-control(type='text', placeholder='Telefono')
+        .form-group
+          label.col-sm-2(for='txpatientsemail') Email
+          .col-sm-10
+            input#txpatientsemail.form-control(type='email', placeholder='Email')
+
+        button.btn.btn-default(type='submit') Submit

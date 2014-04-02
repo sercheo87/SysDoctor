@@ -1,0 +1,72 @@
+extends ../site
+
+block content
+	.theme-showcase(role='main')
+		.page-header
+			h1=title
+		section
+			.panel.panel-default
+				.panel-heading
+					.panel-title
+						h3.panel-title Paciente
+				.panel-body
+					p Nombres: Juan Manuel Perez Garzota
+					p Edad: 27 Anos
+					p Sexo : Masculino
+					p Direccion : Quito, Pichincha, Las casas y colombia
+					p Telefono : 095555555
+
+			.panel.panel-default
+				.panel-heading
+					.panel-title
+						h3.panel-title Controles Medicos
+							a(href='/') 
+								i.fa.fa-plus-square.pull-right
+				.panel-body
+					.row
+						.form-inline(role='form')
+							.form-group
+								label.control-label Desde:
+								input.form-control(type='date')
+							.form-group
+								label.control-label Hasta:
+								input.form-control(type='date')
+							.form-group.pull-right
+								label.control-label Filtro:
+								input.form-control(type='search')
+
+					table.table.table-hover.table-condensed.table-hover
+						thead
+							tr
+								th Fecha
+								th Peso
+								th Talla
+								th Presion
+								th Motivo
+						tbody
+							tr
+								td 2014-Mar-10
+								td 3.52 Kg
+								td 150.23 cm
+								td 50/60
+								td
+									a(href='/receipts/1') Dolor extremidades
+
+			.panel.panel-default
+				.panel-heading
+					h3.panel-title Detalle del Historial
+						a(href='/') 
+							i.fa.fa-plus-square.pull-right
+				.panel-body
+					table.table.table-hover.table-condensed.table-hover
+						thead
+							tr
+								th Fecha
+								th Observacion
+								th Receta
+						tbody
+							tr
+								td 2014-Mar-10
+								td Paracetamol
+								td
+									a(href='/receipts/1') COD 123456
