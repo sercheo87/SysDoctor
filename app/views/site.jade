@@ -1,34 +1,35 @@
 extends layout
 
-block js
-  script(type='text/javascript', src='/js/tmpl/menu.js')
+block jsmaster
+	script(type='text/javascript', src='/js/tmpl/menu.js')
 
 block content_master
-  .row.row-offcanvas.row-offcanvas-right
-    .col-xs-12.col-sm-9.col-md-10
-      p.pull-right.visible-xs
-        button.btn.btn-primary.btn-xs(type='button', data-toggle='offcanvas') Menus
-      block content
-    #sidebar.col-xs-6.col-sm-3.col-md-2.sidebar-offcanvas(role='navigation')
-      .list-group
-        a.list-group-item.active(href='#') Link
-      block options
-        #pnl_menu.panel-group
+	.row.row-offcanvas.row-offcanvas-right
+		.col-xs-12.col-sm-9.col-md-9
+			p.pull-right.visible-xs
+				button.btn.btn-primary.btn-xs(type='button', data-toggle='offcanvas') Menus
+			block content
+		#sidebar.col-xs-6.col-sm-3.col-md-3.sidebar-offcanvas(role='navigation')
+			.list-group
+				a.list-group-item.active(href='#') Link
+			block options
+				#pnl_menu.panel-group
 
-  script#entry-template(type='text/x-handlebars-template')
-    <div class="panel panel-default">
-    <div class="panel-heading">
-    <h4 class="panel-title">
-    <a data-toggle="collapse" data-parent="#pnl_menu" href="{{{link id}}}"}><i class="fa fa-{{icon}}"></i> {{text}}</a>
-    </h4>
-    </div>
-    <div id="{{id}}" class="panel-collapse collapse">
-    <div class="panel-body">
-    <ul>
-    {{#each items}}
-    <li><a href="{{route}}">{{text}}</a></li>
-    {{/each}}
-    </ul>
-    </div>
-    </div>
-    </div>
+	script#entry-template(type='text/x-handlebars-template')
+		<div class="panel panel-default">
+		<div class="panel-heading">
+		<h4 class="panel-title">
+		<a data-toggle="collapse" data-parent="#pnl_menu" href="{{{link id}}}"}><i class="fa fa-{{icon}}"></i> {{text}}</a>
+		</h4>
+		</div>
+		<div id="{{id}}" class="panel-collapse collapse {{show}}">
+		<div class="panel-body">
+		<small>{{description}}</small>
+		</div>
+		<ul class="list-group">
+		{{#each items}}
+		<li class="list-group-item"><a href="{{route}}">{{text}}</a></li>
+		{{/each}}
+		</ul>
+		</div>
+		</div>
