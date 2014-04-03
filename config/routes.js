@@ -40,9 +40,17 @@ module.exports = function(app, data_init){
 	app.get('/api/users/:login', api_user.GetUser);
 	app.post('/api/users/:login', api_user.GetUser);
 
-	//Patients
+	// Patients
 	var api_patient=require('../app/apis/api_patient');
 	app.put('/api/users/add', csrf, api_patient.addPatient);
+
+	// Civil Status
+	var api_civilStatus=require('../app/apis/api_civilStatus');
+	app.get('/api/civilStatus/list', csrf, api_civilStatus.GetAllItems);
+
+	// Profeciones
+	var api_profession=require('../app/apis/api_profession');
+	app.get('/api/profession/list', csrf, api_profession.GetAllItems);
 
 	app.all('*', function(req, res){
 		res.send(404);

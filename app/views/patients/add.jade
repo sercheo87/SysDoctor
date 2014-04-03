@@ -27,21 +27,17 @@ block content
 				.form-group
 					label.col-sm-2(for='txpatientscivilstatus') Estado Civil
 					.col-sm-10
-						input#txpatientscivilstatus.form-control(type='text', placeholder='Estado Civil')
+						select#slpatientscivilstatus.selectpicker(data-live-search='true', placeholder='Estado Civil')
 				.form-group
 					label.col-sm-2(for='txpatientsocupation') Profesion
 					.col-sm-10
-						input#txpatientsocupation.form-control(type='text', placeholder='Profesion')
+						select#slpatientsprofession.selectpicker(data-live-search='true', placeholder='Profesion')
 
 				.form-group
 					legend Direcciones
 				.form-group
 					label.col-sm-2(for='txpatientscity') Ciudad
 					.col-sm-10
-						select#slpatientscity.selectpicker(data-live-search='true')
-							option test1
-							option test2
-							option test3
 						input#txpatientscity.form-control(type='text', placeholder='Ciudad')
 				.form-group
 					label.col-sm-2(for='txpatientsaddress') Direccion

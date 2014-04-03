@@ -41,6 +41,16 @@ module.exports = function(orm){
 		pass: 			{ type: 'text', required: 'true' }
 	});
 
+	sync.defineCollection('tbcivilstatus', {
+		id: 					{ type: 'number', primary: true, serial: true },
+		description: 	{ type: 'text', required: 'true' }
+	});
+
+	sync.defineCollection('tbprofession', {
+		id: 					{ type: 'number', primary: true, serial: true },
+		description: 	{ type: 'text', required: 'true' }
+	});
+
 
 	sync.sync(function (err) {
 		if (err) {
@@ -50,10 +60,10 @@ module.exports = function(orm){
 			console.log('> Sync Done');
 
 			/* Valores Default */
-			/* Usuario Adminisrador Manager */
+			// Usuario Adminisrador Manager
 			db.models.tbusers.count({ login: 'admin' }, function (err, count) {
 				if(count==0){
-					console.log('Creating user manager');
+					console.log('Creating User Manager');
 					db.models.tbusers.create([{
 						name:'Administrator',
 						lastname:'Manager',
@@ -67,6 +77,46 @@ module.exports = function(orm){
 							res.send(500, {error: "Error en establecimiento de Data por Default"});
 						}
 					});
+				}
+			});
+
+			// Estado Civil
+			db.models.tbcivilstatus.count({}, function (err, count) {
+				if(count==0){
+					console.log('Creating Civil Status');
+					db.models.tbcivilstatus.create([
+						{ description:'Casado' },
+						{ description:'Soltero' },
+						{ description:'Viudo' },
+						{ description:'Divorciado' },
+						{ description:'Union Libre' },
+						{ description:'Otro' }
+						],function(err,data){
+							if(err){
+								console.log(err);
+								res.send(500, {error: "Error en establecimiento de Data por Default"});
+							}
+						});
+				}
+			});
+
+			// Profesiones
+			db.models.tbprofession.count({}, function (err, count) {
+				if(count==0){
+					console.log('Creating Professions');
+					db.models.tbprofession.create([
+						{ description:'Ninguno' },
+						{ description:'Ama de Casa' },
+						{ description:'Ingeniero' },
+						{ description:'Doctor' },
+						{ description:'Secretaria' },
+						{ description:'Obrero' }
+						],function(err,data){
+							if(err){
+								console.log(err);
+								res.send(500, {error: "Error en establecimiento de Data por Default"});
+							}
+						});
 				}
 			});
 
