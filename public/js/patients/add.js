@@ -1,4 +1,8 @@
 $(function () {
+	$('#slpatientscity').append($('<option>', { 
+		value: 1, text : 'ffff' })
+	);
+	$('#slpatientscity').selectpicker('refresh');
 	$('#btAddPatient').click(function(event) {
 		$.ajax({
 			url: '/api/users/add',
@@ -13,7 +17,7 @@ $(function () {
 				'address': 				$('#txpatientsaddress').val(),
 				'phone': 					$('#txpatientsphone').val(),
 				'email': 					$('#txpatientsemail').val()
-		},
+			},
 			success: function(data) {
 				if(data.success){
 
