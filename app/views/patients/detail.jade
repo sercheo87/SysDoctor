@@ -1,72 +1,194 @@
 extends ../site
 
+block js
+	script(type='text/javascript', src='/js/patients/detail.js')
+
 block content
 	.theme-showcase(role='main')
 		.page-header
-			h1=title
-		section
-			.panel.panel-default
-				.panel-heading
-					.panel-title
-						h3.panel-title Paciente
-				.panel-body
-					p Nombres: Juan Manuel Perez Garzota
-					p Edad: 27 Anos
-					p Sexo : Masculino
-					p Direccion : Quito, Pichincha, Las casas y colombia
-					p Telefono : 095555555
+			h2=title
 
-			.panel.panel-default
-				.panel-heading
-					.panel-title
-						h3.panel-title Controles Medicos
-							a(href='/') 
-								i.fa.fa-plus-square.pull-right
-				.panel-body
+		.form-horizontal.well
+			legend#lbtitlepersonalinformation
+			input#tx_patient(type='hidden')
+			input#tx_medical(type='hidden')
+			.row
+				.col-xs-12.col-sm-6.col-md-6
+					.form-group
+						label#lbName.col-xs-6.col-sm-6.control-label
+						.col-xs-6.col-sm-6
+							p#pName.form-control-static
+				.col-xs-12.col-sm-6.col-md-6
+					.form-group
+						label#lbYearsOld.col-xs-6.col-sm-6.control-label
+						.col-xs-6.col-sm-6
+							p#pYearsOld.form-control-static
+				.col-xs-12.col-sm-6.col-md-6
+					.form-group
+						label#lbSex.col-xs-6.col-sm-6.control-label
+						.col-xs-6.col-sm-6
+							p#pSex.form-control-static
+				.col-xs-12.col-sm-6.col-md-6
+					.form-group
+						label#lbJob.col-xs-6.col-sm-6.control-label
+						.col-xs-6.col-sm-6
+							p#pJob.form-control-static
+
+		#TblCtrlMedic.panel.panel-default
+			.panel-heading.clearfix
+				h4#lbtitlegeneralinformation.panel-title.pull-left
+				.btn-group.btn-group-sm.pull-right
+					a#itemAddInfo.btn.btn-default(href='#', data-toggle='modal', data-target='#mdlMedInfoBase')
+						i.fa.fa-plus-square
+					a#itemEditInfo.btn.btn-default(href='#', data-toggle='modal', data-target='#mdlMedInfoBase') 
+						i.fa.fa-edit
+			.panel-body
+				#ctnTblCtrlMedic.col-md-12
+					.form(role='form')
+						.row
+							.col-md-6
+								.form-group
+									label.control-label(for='tx_med_e_habit') Habitos
+									input#tx_med_e_habit.input-sm.form-control(type='text', placeholder='Habitos', disabled='disabled')
+
+							.col-md-6
+								.form-group
+									label.control-label(for='tx_med_e_antecedent') Antecedentes
+									input#tx_med_e_antecedent.input-sm.form-control(type='text', placeholder='Antecedentes Familiares', disabled='disabled')
+
+							.col-md-6
+								.form-group
+									label.control-label(for='tx_med_e_alergy') Alergias
+									input#tx_med_e_alergy.input-sm.form-control(type='text', placeholder='Alergias', disabled='disabled')
+
+							.col-md-6
+								.form-group
+									label.control-label(for='tx_med_e_bloodtype') Tipo de Sangre
+									input#tx_med_e_bloodtype.input-sm.form-control(type='text', placeholder='Tipo de Sangre', disabled='disabled')
+
+							.col-md-12
+								.form-group
+									label.control-label(for='tx_med_e_eobservation') Observacion
+									textarea#tx_med_e_eobservation.input-sm.form-control(type='text', placeholder='Observacion', disabled='disabled')
+
+		.panel.panel-default
+			.panel-heading.clearfix
+				h4#lbtitlecontrol.panel-title.pull-left
+				.btn-group.btn-group-sm.pull-right
+					a#itemAddControl.btn.btn-default(href='#', data-toggle='modal', data-target='#mdlMedAppointment')
+						i.fa.fa-plus-square
+					span#itemFilter.btn.btn-default
+						i.fa.fa-filter
+			.panel-body
+				#ctnTblControl.col-md-12
+				form#frMedConDetail.form(role='form')
 					.row
-						.form-inline(role='form')
+						.col-md-6
 							.form-group
-								label.control-label Desde:
-								input.form-control(type='date')
+								label.control-label(for='tx_mcd_id',disabled='disabled') Codigo
+								input#tx_mcd_id.input-sm.form-control(name='tx_mcd_id',type='text', placeholder='Codigo', disabled='disabled')
+
+						.col-md-6
 							.form-group
-								label.control-label Hasta:
-								input.form-control(type='date')
-							.form-group.pull-right
-								label.control-label Filtro:
-								input.form-control(type='search')
+								label.control-label(for='tx_mcd_date') Fecha
+								input#tx_mcd_date.input-sm.form-control(name='tx_mcd_date',type='text', placeholder='Fecha', disabled='disabled')
 
-					table.table.table-hover.table-condensed.table-hover
-						thead
-							tr
-								th Fecha
-								th Peso
-								th Talla
-								th Presion
-								th Motivo
-						tbody
-							tr
-								td 2014-Mar-10
-								td 3.52 Kg
-								td 150.23 cm
-								td 50/60
-								td
-									a(href='/receipts/1') Dolor extremidades
+						.col-md-3
+							.form-group
+								label.control-label(for='tx_mcd_weidth') Peso
+								input#tx_mcd_weidth.input-sm.form-control.integer(name='tx_mcd_weidth',type='number', placeholder='Peso')
 
-			.panel.panel-default
-				.panel-heading
-					h3.panel-title Detalle del Historial
-						a(href='/') 
-							i.fa.fa-plus-square.pull-right
-				.panel-body
-					table.table.table-hover.table-condensed.table-hover
-						thead
-							tr
-								th Fecha
-								th Observacion
-								th Receta
-						tbody
-							tr
-								td 2014-Mar-10
-								td Paracetamol
-								td
-									a(href='/receipts/1') COD 123456
+						.col-md-3
+							.form-group
+								label.control-label(for='tx_mcd_size') Altura
+								input#tx_mcd_size.input-sm.form-control.integer(name='tx_mcd_size',type='number', placeholder='Altura')
+
+						.col-md-3
+							.form-group
+								label.control-label(for='tx_mcd_pressure') Presion
+								input#tx_mcd_pressure.input-sm.form-control.alphanumeric(name='tx_mcd_pressure', type='text', placeholder='Presion')
+
+						.col-md-3
+							.form-group
+								label.control-label(for='tx_mcd_pulse') Pulso
+								input#tx_mcd_pulse.input-sm.form-control.alphanumeric(name='tx_mcd_pulse',type='text', placeholder='Pulso')
+
+						.col-md-12
+							.form-group
+								label.control-label(for='tx_mcd_reason') Motivo
+								textarea#tx_mcd_reason.input-sm.form-control.alphanumeric(name='tx_mcd_reason',type='text', placeholder='Motivo')
+
+						.col-md-12
+							.form-group
+								label.control-label(for='tx_mcd_observation') Observaciones
+								textarea#tx_mcd_observation.input-sm.form-control(name='tx_mcd_observation',type='text', placeholder='Observaciones')
+
+					a#btokMedAppointment.btn.btn-primary(type='button')
+						i.fa.fa-floppy-o
+						|  Grabar
+
+					a#btcancelMedAppointment.btn.btn-primary(type='button')
+						i.fa.fa-arrow-circle-o-left
+						|  Cancelar
+					hr
+					fieldset
+						table#tbl_recipe.table.table-hover
+							thead
+								tr
+									th
+									th.text-center
+										| Medicamento
+									th.text-center
+										| Dosis
+									th.text-center
+										| Nota
+							tbody
+
+		//mdlMedInfoBase
+		#mdlMedInfoBase.modal.fade
+			.modal-dialog
+				.modal-content
+					.modal-header
+						button.close(type='button', data-dismiss='modal') ×
+						h4.modal-title Registro Inicial del Paciente
+					.modal-body
+						form#frMedical.form-horizontal.form(role='form')
+
+							.form-group
+								label.control-label.col-md-4(for='tx_med_habit') Habitos
+								.col-md-8
+									input#tx_med_habit.form-control.alphanumeric(type='text', placeholder='Habitos')
+
+							.form-group
+								label.control-label.col-md-4(for='tx_med_antecedent') Antecedentes
+								.col-md-8
+									input#tx_med_antecedent.form-control.alphanumeric(type='text', placeholder='Antecedentes Familiares')
+
+							.form-group
+								label.control-label.col-md-4(for='tx_med_alergy') Alergias
+								.col-md-8
+									input#tx_med_alergy.form-control.alphanumeric(type='text', placeholder='Alergias')
+
+							.form-group
+								label.control-label.col-md-4(for='tx_med_bloodtype') Tipo de Sangre
+								.col-md-8
+									input#tx_med_bloodtype.form-control.alphanumeric(type='text', placeholder='Tipo de Sangre')
+
+							.form-group
+								label.control-label.col-md-4(for='tx_med_observation') Observacion
+								.col-md-8
+									textarea#tx_med_observation.form-control.alphanumeric(type='text', placeholder='Observacion')
+
+
+					//dialog buttons 
+					.modal-footer
+						button#btcancelGeneralMedGen.btn.btn-default(type='submit')
+							i.fa.fa-arrow-left
+							|  Cancelar
+						button#btnokGeneral.btn.btn-primary(type='button')
+							i.fa.fa-floppy-o
+							|  Grabar
+		//-----------------------------------------------------------------------------------
+
+	script(type='text/javascript').
+		var dataPatient = !{JSON.stringify(dataId)};

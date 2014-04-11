@@ -1,9 +1,15 @@
 extends ../site
 
+block js
+	script(type='text/javascript', src='/js/patients/list.js')
+
 block content
-	.container.theme-showcase(role='main').col-md-10
+	.theme-showcase(role='main')
 		.page-header
 			h1=title
-		section
-			p Listado
-			a(href='/patients/detail/1') paciente 1
+
+	.panel.panel-default
+		.panel-heading
+			h3.panel-title Listado de Pacientes
+		.panel-body
+			#ctnTblPatients.col-md-12

@@ -5,6 +5,12 @@ var Sync = require('sql-ddl-sync').Sync;
 
 module.exports = function(orm){
 
+	db.models.tbcity.hasOne('country', db.models.tbcountry,{required: true});
+	db.models.tbcity.sync();
+	db.models.tbmedicine.hasOne('groupmedicine', db.models.tbgroupmedicine,{required: true});
+	db.models.tbmedicine.sync();
+	db.sync();
+
 	var sync = new Sync({
 		dialect : 'mysql',
 		db      : orm.db.driver.db,
@@ -13,57 +19,110 @@ module.exports = function(orm){
 		}
 	});
 
-	/* Estructuras de la BD*/
-
 	/* Tablas */
 	sync.defineCollection('tbpatient', {
 		id_patient: 			{ type: 'number', primary: true, serial: true },
-		address: 					{ type: 'text', required: 'false', size: 200},
-		email: 						{ type: 'text', required: 'false', size: 200},
-		id_city: 					{ type: 'number', required: 'true' },
-		id_civil_status: 	{ type: 'number', required: 'true' },
-		id_education: 		{ type: 'number', required: 'true' },
-		id_profession: 		{ type: 'number', required: 'true' },
-		identification: 	{ type: 'text', required: 'true', size: 20},
-		last_name: 				{ type: 'text', required: 'true', size: 50},
-		name: 						{ type: 'text', required: 'true', size: 50},
-		ocupation: 				{ type: 'text', required: 'false', size: 255},
-		phone: 						{ type: 'text', required: 'false', size: 20}
+		address: 					{ type: 'text', required: false, size: 200 },
+		email: 						{ type: 'text', required: false, size: 200 },
+		id_city: 					{ type: 'number', required: true },
+		id_civil_status: 	{ type: 'number', required: true },
+		id_education: 		{ type: 'number', required: true },
+		id_profession: 		{ type: 'number', required: true },
+		identification: 	{ type: 'text', required: true, size: 20 },
+		last_name: 				{ type: 'text', required: true, size: 50 },
+		name: 						{ type: 'text', required: true, size: 50 },
+		ocupation: 				{ type: 'text', required: false, size: 255 },
+		phone: 						{ type: 'text', required: false, size: 20 },
+		birthday: 				{ type: 'date', required: true, time: false },
+		sex: 							{ type: 'enum', required: true, size: 1, values: [ 'F', 'M', 'O' ], defaultValue:'M' }
 	});
 
 	sync.defineCollection('tbusers', {
 		iduser: 		{ type: 'number', primary: true, serial: true },
-		name: 			{ type: 'text', required: 'true' },
-		lastname: 	{ type: 'text', required: 'true' },
-		datebirth: 	{ type: 'date', required: 'false', time: false },
-		state: 			{ type: 'boolean', required: 'true' },
-		login: 			{ type: 'text', required: 'true' },
-		pass: 			{ type: 'text', required: 'true' }
+		name: 			{ type: 'text', required: true },
+		lastname: 	{ type: 'text', required: true },
+		datebirth: 	{ type: 'date', required: false, time: false },
+		state: 			{ type: 'boolean', required: true },
+		login: 			{ type: 'text', required: true },
+		pass: 			{ type: 'text', required: true }
 	});
 
 	sync.defineCollection('tbcivilstatus', {
 		id: 					{ type: 'number', primary: true, serial: true },
-		description: 	{ type: 'text', required: 'true' }
+		description: 	{ type: 'text', required: true }
 	});
 
 	sync.defineCollection('tbprofession', {
 		id: 					{ type: 'number', primary: true, serial: true },
-		description: 	{ type: 'text', required: 'true' }
+		description: 	{ type: 'text', required: true }
 	});
 
+	sync.defineCollection('tbcountry', {
+		id: 					{ type: 'number', primary: true, serial: true },
+		description: 	{ type: 'text', required: true }
+	});
 
-	sync.sync(function (err) {
-		if (err) {
-			console.log('> Sync Error');
-			console.log(err);
-		} else {
-			console.log('> Sync Done');
+	sync.defineCollection('tbcity', {
+		id: 					{ type: 'number', primary: true, serial: true },
+		country_id: 	{ type: 'number' },
+		description: 	{ type: 'text', required: true }
+	});
 
-			/* Valores Default */
+	sync.defineCollection('tbmedicine', {
+		id: 								{ type: 'number', primary: true, serial: true },
+		groupmedicine_id: 	{ type: 'number' },
+		description: 				{ type: 'text', required: true }
+	});
+
+	sync.defineCollection('tbgroupmedicine', {
+		id: 					{ type: 'number', primary: true, serial: true },
+		description: 	{ type: 'text', required: true }
+	});
+
+	sync.defineCollection('tbmedicalrecord', {
+		id_medical: 	{ type: 'number', primary: true, serial: true },
+		id_patient: 	{ type: 'number', unique: true },
+		habit: 				{ type: 'text', required: false, size: 500, defaultValue:'N/A' },
+		antecedent: 	{ type: 'text', required: false, size: 500, defaultValue:'N/A' },
+		alergy: 			{ type: 'text', required: false, size: 500, defaultValue:'N/A' },
+		date_reg: 		{ type: 'date', required: false, time: false },
+		observation: 	{ type: 'text', required: false, size: 500, defaultValue:'N/A' },
+		blood_type: 	{ type: 'text', required: false, size: 10, defaultValue:'N/A' }
+	});
+
+	sync.defineCollection('tbmedicalappointments', {
+		id_appointments: 		{ type: 'number', primary: true, serial: true },
+		id_medical: 				{ type: 'number'},
+		date_reg: 					{ type: 'date', required: false, time: true },
+		rweight: 						{ type: 'number', required: true },
+		rsize: 							{ type: 'number', required: true },
+		pulse: 							{ type: 'number', required: true },
+		blood_pressure: 		{ type: 'text', required: true },
+		reason: 						{ type: 'text', required: true },
+		observation: 				{ type: 'text', required: true }
+	});
+
+	sync.defineCollection('tbrecipes', {
+		id_recipes: 			{ type: 'number', primary: true, serial: true },
+		id_appointments: 	{ type: 'number'},
+		medicine: 				{ type: 'text', required: true },
+		dose: 						{ type: 'text', required: true },
+		observation: 			{ type: 'text', required: true }
+	});
+
+	//db.drop(function(){
+		sync.sync(function (err) {
+			if (err) {
+				console.log('> Sync Error');
+				console.log(err);
+			} else {
+				console.log('> Sync Done');
+
+				/* Valores Default */
 			// Usuario Adminisrador Manager
 			db.models.tbusers.count({ login: 'admin' }, function (err, count) {
 				if(count==0){
-					console.log('Creating User Manager');
+					console.log('Creating Record User Manager');
 					db.models.tbusers.create([{
 						name:'Administrator',
 						lastname:'Manager',
@@ -74,7 +133,7 @@ module.exports = function(orm){
 					}],function(err,data){
 						if(err){
 							console.log(err);
-							res.send(500, {error: "Error en establecimiento de Data por Default"});
+							res.send(500, {error: 'Error en establecimiento de Data por Default'});
 						}
 					});
 				}
@@ -83,7 +142,7 @@ module.exports = function(orm){
 			// Estado Civil
 			db.models.tbcivilstatus.count({}, function (err, count) {
 				if(count==0){
-					console.log('Creating Civil Status');
+					console.log('Creating Record Civil Status');
 					db.models.tbcivilstatus.create([
 						{ description:'Casado' },
 						{ description:'Soltero' },
@@ -94,7 +153,7 @@ module.exports = function(orm){
 						],function(err,data){
 							if(err){
 								console.log(err);
-								res.send(500, {error: "Error en establecimiento de Data por Default"});
+								res.send(500, {error: 'Error en establecimiento de Data por Default'});
 							}
 						});
 				}
@@ -103,7 +162,7 @@ module.exports = function(orm){
 			// Profesiones
 			db.models.tbprofession.count({}, function (err, count) {
 				if(count==0){
-					console.log('Creating Professions');
+					console.log('Creating Record Professions');
 					db.models.tbprofession.create([
 						{ description:'Ninguno' },
 						{ description:'Ama de Casa' },
@@ -114,12 +173,50 @@ module.exports = function(orm){
 						],function(err,data){
 							if(err){
 								console.log(err);
-								res.send(500, {error: "Error en establecimiento de Data por Default"});
+								res.send(500, {error: 'Error en establecimiento de Data por Default'});
+							}
+						});
+				}
+			});
+
+			// Paises
+			db.models.tbcountry.count({}, function (err, count) {
+				if(count==0){
+					console.log('Creating Record Country');
+					db.models.tbcountry.create([
+						{ description:'Colombia' },
+						{ description:'Ecuador' },
+						{ description:'Chile' },
+						{ description:'Argentina' },
+						{ description:'Peru' },
+						{ description:'Mexico' }
+						],function(err,data){
+							if(err){
+								console.log(err);
+								res.send(500, {error: 'Error en establecimiento de Data por Default'});
+							}
+						});
+				}
+			});
+
+			// Ciudad
+			db.models.tbcity.count({}, function (err, count) {
+				if(count==0){
+					console.log('Creating Record City');
+					db.models.tbcity.create([
+						{ country_id: 2, description:'Quito' },
+						{ country_id: 2, description:'Portoviejo' },
+						{ country_id: 2, description:'Guayas' }
+						],function(err,data){
+							if(err){
+								console.log(err);
+								res.send(500, {error: 'Error en establecimiento de Data por Default'});
 							}
 						});
 				}
 			});
 
 		}
-	});
+	//});
+});
 };

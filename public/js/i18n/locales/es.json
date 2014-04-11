@@ -1,0 +1,17 @@
+{
+	"Hello": "Hola",
+	"Hello %s": "Hello %s",
+	"%s cat": {
+		"zero": "no cats",
+		"one": "%s cat",
+		"other": "%s cats"
+		},
+	"msg_registers_not_found":"No se han encontrado Registros",
+	"etq_names":"Nombres:",
+	"etq_yearsold":"Edad:",
+	"etq_sex":"Sexo:",
+	"etq_job":"Ocupacion:",
+	"etq_ctrlmedic":"Controles Medicos",
+	"etq_generalinfo":"Informacion General",
+	"etq_personalinfo":"Informacion Personal"
+}

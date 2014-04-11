@@ -1,0 +1,11 @@
+{
+	"Hello": "Hola",
+	"Hello %s": "Hello %s",
+	"%s cat": {
+		"zero": "no cats",
+		"one": "%s cat",
+		"other": "%s cats"
+		},
+	"msg_registers_not_found":"No se han encontrado Registros",
+	"etq_names":"Nombres:"
+}
