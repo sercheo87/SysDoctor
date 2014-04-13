@@ -15,6 +15,10 @@ module.exports = function(app, data_init){
 	app.get('/patients/list', patients.list);
 	app.get('/patients/detail/:identification', patients.detail);
 
+	//Reports
+	var receipts = require('../app/controllers/ctrl_receipts')
+	app.get('/receipt/inquiry/:idPatient',receipts.inquiry)
+
 
 
 /* =========================== API ======================== */

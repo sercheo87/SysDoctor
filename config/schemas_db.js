@@ -34,7 +34,11 @@ module.exports = function(orm){
 		ocupation: 				{ type: 'text', required: false, size: 255 },
 		phone: 						{ type: 'text', required: false, size: 20 },
 		birthday: 				{ type: 'date', required: true, time: false },
-		sex: 							{ type: 'enum', required: true, size: 1, values: [ 'F', 'M', 'O' ], defaultValue:'M' }
+		sex: 							{ type: 'enum', required: true, size: 1, values: [ 'F', 'M', 'O' ], defaultValue:'M' },
+		emergency_phone: 	{ type: 'text', required: false, size: 20 },
+		emergency_name: 	{ type: 'text', required: false, size: 80 },
+		emergency_kin: 		{ type: 'text', required: false, size: 20 },
+		birthplace: 			{ type: 'text', required: true, size: 50 }
 	});
 
 	sync.defineCollection('tbusers', {

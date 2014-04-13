@@ -197,15 +197,15 @@ $.fn.validateCurrency = function (signed, decimalSeparator, decimalDigits, allow
 	});
 };
 
-
-
-$('.alphabetic').validateAlphabetic(false);
-$('.spaced-alphabetic').validateAlphabetic(true);
-$('.integer').validateCurrency(true, '', 0, false);
-$('.spaced-integer').validateCurrency(true, '', 0, true);
-$('.unsigned-integer').validateCurrency(false, '', 0, false);
-$('.spaced-unsigned-integer').validateCurrency(false, '', 0, true);
-$('.alphanumeric').validateAlphanumeric(false);
-$('.spaced-alphanumeric').validateAlphanumeric(true);
-$('.email').validateEmail();
+$(function(){
+	$('.alphabetic').validateAlphabetic(false);
+	$('.spaced-alphabetic').validateAlphabetic(true);
+	$('.integer').validateCurrency(true, '', 0, false);
+	$('.spaced-integer').validateCurrency(true, '', 0, true);
+	$('.unsigned-integer').validateCurrency(false, '', 0, false);
+	$('.spaced-unsigned-integer').validateCurrency(false, '', 0, true);
+	$('.alphanumeric').validateAlphanumeric(false);
+	$('.spaced-alphanumeric').validateAlphanumeric(true);
+	$('.email').validateEmail();
+});
 /* *************************************************************************************** */

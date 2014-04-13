@@ -51,7 +51,7 @@ $(function () {
 	});
 
 	/* Enviar registro */
-	$('#btokGeneral').click(function(event) {
+	$('#btokGeneralMedGen').click(function(event) {
 		var validForm = $('#frMedical').valid();
 		if(validForm){
 			$.ajax({
@@ -68,6 +68,7 @@ $(function () {
 				success: function(data) {
 					if(data.success){
 						AlertShow('info',data.msg);
+						GetMedicalInformation();
 					}else{
 						AlertShow('warning',data.msg);
 					}
@@ -77,7 +78,7 @@ $(function () {
 		}
 	});
 
-	$('#btcancelGeneral').click(function(event) {
+	$('#btcancelGeneralMedGen').click(function(event) {
 		$('#mdlMedInfoBase').modal('hide');
 	});
 	/* ---------------------------------------------------------------------- */
@@ -159,15 +160,13 @@ $(function () {
 					}
 				}
 			});
-			$('#frMedConDetail').hide();
-			$('#ctnTblControl').fadeIn('slow');
+			EnableButttonMedical(false);
 		}
 		GetMedicalAppointments($('#tx_medical').val());
 	});
 
 	$('#btcancelMedAppointment').click(function(event) {
-		$('#frMedConDetail').hide();
-		$('#ctnTblControl').fadeIn('slow');
+		EnableButttonDetMedical(false);
 	});
 	/* ---------------------------------------------------------------------- */
 	/* Obtener informacion del Paciente */
@@ -200,9 +199,25 @@ $(function () {
 	});
 
 	loadLabels();
+	EnableButttonDetMedical(false);
 
-	$('#itemFilter').attr('data-toggle', 'tooltip');
-	$('#itemFilter').attr('title', 'Filtro de informacion');
+	$('#itemFilter').setTooltip('Filtro de informacion');
+	$('#itemAddControl').setTooltip('Agregar Control Medico');
+	$('#itemPrint').setTooltip('Imprimir Receta');
+	$('#itemAddInfo').setTooltip('Agregar Informacion Medica');
+	$('#itemEditInfo').setTooltip('Editar Informacion Medica');
+
+	$('#itemAddInfo').click(function(event) {
+		$('#mdlMedInfoBase').modal({
+			keyboard: true
+		});
+	});
+
+	$('#itemEditInfo').click(function(event) {
+		$('#mdlMedInfoBase').modal({
+			keyboard: true
+		});
+	});
 
 	$('#itemFilter').click(function(event) {
 		var $this = $(this), 
@@ -223,12 +238,33 @@ $(function () {
 			});
 
 	$('#frMedConDetail').hide();
-	$('itemAddControl').click(function(event) {
-		$(	'#frMedConDetail').fadeIn('slow');
-		$(	'#ctnTblControl').hide();
+
+	$('#itemAddControl').click(function(event) {
+		EnableButttonDetMedical(true);
 	});
 
+	$('#itemPrint').click(function (event) {
+		console.log('imprimir');
+		event.preventDefault();
+		window.open('/receipt/inquiry/5', "popupWindow", "width=600,height=600,scrollbars=yes");
+	});
 });//jquery
+
+function EnableButttonDetMedical(state){
+	if(state){
+		$('#itemAddControl').attr('disabled', 'disabled');
+		$('#itemFilter').attr('disabled', 'disabled');
+		$('#itemPrint').removeAttr('disabled');
+		$('#frMedConDetail').fadeIn('slow');
+		$('#ctnTblControl').hide();
+	}else{
+		$('#itemPrint').attr('disabled', 'disabled');
+		$('#itemFilter').removeAttr('disabled');
+		$('#itemAddControl').removeAttr('disabled');
+		$('#frMedConDetail').hide();
+		$('#ctnTblControl').fadeIn('slow');
+	}
+}
 
 function GetMedicalAppointments(idMedical){
 	/* Listado de los controles medicos*/
@@ -294,9 +330,7 @@ function GetMedicalAppointmentsDetail(idAppointments){
 				$('#tx_mcd_reason').val(data.data[0].reason);
 				$('#tx_mcd_observation').val(data.data[0].observation);
 
-				$('#frMedConDetail').fadeIn('slow');
-				$('#ctnTblControl').hide();
-
+				EnableButttonDetMedical(true);
 				GetRecipes();
 			}else{
 				console.log('data error',data);
@@ -309,7 +343,6 @@ function AddRecipes(){
 	var medicament=$('#tbl_recipe > tbody > tr#addNew').find('td > #tb_tx_medical').val();
 	var dose=$('#tbl_recipe > tbody > tr#addNew').find('td > #tb_tx_dose').val();
 	var note=$('#tbl_recipe > tbody > tr#addNew').find('td > #tb_tx_note').val();
-	console.log($('#tbl_recipe > tbody > tr#addNew').find('td > #tb_tx_medical').val());
 	
 	$.ajax({
 		url: '/api/medical/recipes/'+$('#tx_mcd_id').val(),
@@ -351,8 +384,43 @@ function RemoveRecipes(idRecipe){
 
 function GetRecipes(){
 	/* Listado de las recetas medicas*/
-	var rowLabel='<tr id="{3}"><td><a onclick="AddRecipes()" class="btn btn-default pull-left btn-primary btn-sm"><i class="fa fa-floppy-o"></i></a><a onclick="RemoveRecipes({3})" class="remove_recipes btn btn-default pull-left btn-sm"><i class="fa fa-eraser"></i></a></td><td><a id="lnkMedicine">{0}</a></td><td><a id="lnkDose">{1}</a></td><td><a id="lnkNote">{2}</a></td></tr>';
-	var rowEdit='<tr id="addNew"><td><a onclick="AddRecipes()" class="add_recipes btn btn-default pull-left btn-primary btn-sm"><i class="fa fa-floppy-o"></i></a><a onclick="RemoveRecipes()" class="remove_recipes btn btn-default pull-left btn-sm"><i class="fa fa-eraser"></i></a></td><td><input id="tb_tx_medical" type="text" name="tb_tx_medical" placeholder="Medicamento" class="form-control alphanumeric input-sm"></td><td><input id="tb_tx_dose" type="text" name="tb_tx_dose" placeholder="Dosis" class="form-control alphanumeric input-sm"></td><td><input id="tb_tx_note" type="text" name="tb_tx_note" placeholder="Nota" class="form-control alphanumeric input-sm"></td></tr>';
+	var rowLabel='';
+	rowLabel+='<tr id="{3}">';
+	rowLabel+='	<td>';
+	rowLabel+='		<a onclick="AddRecipes()" class="btn btn-default pull-left btn-primary btn-sm">';
+	rowLabel+='			<i class="fa fa-floppy-o"></i>';
+	rowLabel+='		</a>';
+	rowLabel+='		<a onclick="RemoveRecipes({3})" class="remove_recipes btn btn-default pull-left btn-sm">';
+	rowLabel+='			<i class="fa fa-eraser"></i>';
+	rowLabel+='		</a>';
+	rowLabel+='	</td>';
+	rowLabel+='	<td>';
+	rowLabel+='		<a id="lnkMedicine">{0}</a>';
+	rowLabel+='	</td>';
+	rowLabel+='	<td>';
+	rowLabel+='		<a id="lnkDose">{1}</a>';
+	rowLabel+='	</td>';
+	rowLabel+='	<td>';
+	rowLabel+='		<a id="lnkNote">{2}</a>';
+	rowLabel+='	</td>';
+	rowLabel+='</tr>';
+
+	var rowEdit='';
+	rowEdit+='<tr id="addNew">';
+	rowEdit+='	<td>';
+	rowEdit+='		<a onclick="AddRecipes()" class="add_recipes btn btn-default pull-left btn-primary btn-sm"><i class="fa fa-floppy-o"></i></a>';
+	rowEdit+='		<a onclick="RemoveRecipes()" class="remove_recipes btn btn-default pull-left btn-sm"><i class="fa fa-eraser"></i></a>';
+	rowEdit+='	</td>';
+	rowEdit+='	<td>';
+	rowEdit+='		<input id="tb_tx_medical" type="text" name="tb_tx_medical" placeholder="Medicamento" class="form-control alphanumeric input-sm">';
+	rowEdit+='	</td>';
+	rowEdit+='	<td>';
+	rowEdit+='		<input id="tb_tx_dose" type="text" name="tb_tx_dose" placeholder="Dosis" class="form-control alphanumeric input-sm">';
+	rowEdit+='	</td>';
+	rowEdit+='	<td>';
+	rowEdit+='		<input id="tb_tx_note" type="text" name="tb_tx_note" placeholder="Nota" class="form-control alphanumeric input-sm">';
+	rowEdit+='	</td>';
+	rowEdit+='</tr>';
 	var row='';
 
 	$.ajax({

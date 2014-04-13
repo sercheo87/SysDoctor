@@ -34,6 +34,9 @@ block content
 				label.col-sm-2(for='slpatientssex') Sexo
 				.col-sm-10
 					select#slpatientssex.form-control(data-live-search='true', placeholder='Sexo',name='slpatientssex')
+						option(value='M') Masculino
+						option(value='F') Femenino
+						option(value='O') Otro
 			.form-group
 				label.col-sm-2(for='slpatientsprofession') Profesion
 				.col-sm-10
@@ -53,6 +56,32 @@ block content
 				label.col-sm-2(for='txpatientsaddress') Direccion
 				.col-sm-10
 					input#txpatientsaddress.form-control.spaced-alphanumeric(type='text', placeholder='Direccion',name='txpatientsaddress')
+			.form-group
+				label.col-sm-2(for='txbirthplace') Lugar de Nacimiento
+				.col-sm-10
+					input#txbirthplace.form-control.spaced-alphanumeric(type='text', placeholder='Direccion',name='txbirthplace')
+
+			.form-group
+				legend Contacto de Emergencia
+			.form-group
+				label.col-sm-2(for='txEmergencyName') Nombres
+				.col-sm-10
+					input#txEmergencyName.form-control.spaced-alphanumeric(type='text', placeholder='Nombres',name='txEmergencyName')
+			.form-group
+				label.col-sm-2(for='slEmergencyKin') Parentesco
+				.col-sm-10
+					select#slEmergencyKin.form-control(data-live-search='true', placeholder='Parentesco',name='slEmergencyKin')
+						option(value='0') Madre
+						option(value='1') Padre
+						option(value='2') Amiga(o)
+						option(value='3') Tia(o)
+						option(value='4') Sobrina(o)
+						option(value='5') Prima(o)
+						option(value='6') Otro
+			.form-group
+				label.col-sm-2(for='txEmergencyPhone') Telefono
+				.col-sm-10
+					input#txEmergencyPhone.form-control.integer(type='text', placeholder='Telefono',name='txEmergencyPhone')
 
 			.form-group
 				legend Informacion de Contacto

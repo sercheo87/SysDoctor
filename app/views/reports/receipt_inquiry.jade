@@ -1,0 +1,71 @@
+doctype 5
+html(lang='en')
+	head
+		meta(charset='UTF-8')
+		meta(http-equiv='X-UA-Compatible', content='IE=edge')
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		title Consulta Medica
+
+		link(rel='stylesheet', href='/css/printer.css')
+		script(type='text/javascript', src='/components/jquery/dist/jquery.min.js')
+	body
+		header
+			strong
+				h3 Centro Medico La Paz
+				p
+				small Pichincha, 27 Marzo 2014
+		hr
+
+		.row
+			legend Datos Personales
+			.col-md-6
+				p
+					strong Paciente
+					|: Juan Ernesto Perez Chiriboga
+			.col-md-3
+				p
+					strong Edad
+					|: 27 Años
+
+			br
+			br
+
+			.row
+				legend Receta Medica
+				table.table.table-responsive.table-striped
+					thead
+						tr
+							th
+								p #
+							th
+								p Nombre
+							th
+								p Dosis
+							th
+								p Nota
+							th
+								p Obs.
+					tbody
+						tr
+							td
+								p 1
+							td
+								p Paracetamol
+							td
+								p 1 tableta cada hora
+							td
+								p 20 tabletas
+							td
+								..........................................................
+			footer
+				hr
+				address
+					strong Twitter, Inc.
+					br
+					| 795 Folsom Ave, Suite 600
+					br
+					| San Francisco, CA 94107
+					br
+					abbr(title='Telefonos') Telf:
+					| (123) 456-7890
+

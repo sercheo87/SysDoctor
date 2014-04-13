@@ -1,0 +1,37 @@
+
+* { 
+	background: transparent !important; 
+	color: black !important; 
+	text-shadow: none !important; 
+	filter:none !important; 
+	-ms-filter: none !important; 
+}
+
+a, a:visited { 
+	text-decoration: underline; 
+}
+
+p, strong{
+	font-size: 12px;
+}
+
+header{
+	font-weight: bold;
+	font-size: 16px;
+	text-align: center;
+}
+
+footer{
+	font-weight: bold;
+	font-size: 10px;
+	text-align: center;
+}
+
+legend{
+	font-weight: bold;
+	font-size: 14px;
+}
+
+table{
+	border: 1px solid black;
+}

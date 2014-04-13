@@ -68,21 +68,24 @@ var ahora_dia = fecha_hoy.getDate();
 
 // realizamos el calculo
 var edad = (ahora_ano + 1900) - ano;
-if ( ahora_mes < (mes - 1))
-{
-	edad--;
-}
-if (((mes - 1) == ahora_mes) && (ahora_dia < dia))
-{
-	edad--;
-}
-if (edad > 1900)
-{
-	edad -= 1900;
-}
+
+if ( ahora_mes < (mes - 1)) edad--;
+if (((mes - 1) == ahora_mes) && (ahora_dia < dia)) edad--;
+if (edad > 1900) edad -= 1900;
+if (edad<0) edad = 0
 return edad;
 }
 
+/* Tooltip */
+/* *************************************************************************************** */
+jQuery.fn.setTooltip=function(msg){
+	this.attr('data-toggle', 'tooltip');
+	return this.attr('title', msg).tooltip({
+		placement: 'top',
+		trigger: 'hover',
+		delay: { show: 200, hide: 100 }
+	});
+}
 /* Validations Input */
 /* *************************************************************************************** */
 jQuery.validator.addMethod('phoneValidator', function(value, element) {
@@ -137,7 +140,7 @@ jQuery.fn.formatTable = function (options) {
 					idToolTemp=jsonValue[columnName.id];
 				}
 			}
-				row += $.format('<td>{0}</td>',tdValue);
+			row += $.format('<td>{0}</td>',tdValue);
 		});
 		//creacion de las columnas de herramientas
 		if(options.tools.showTools==true)

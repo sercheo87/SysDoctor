@@ -15,7 +15,11 @@ $(function () {
 			slpatientscity: 						{ required:true },
 			txpatientsaddress: 					{ required:true },
 			txpatientsbirthday:					{ required:true },
-			slpatientssex:							{ required:true }
+			slpatientssex:							{ required:true },
+			txbirthplace:								{ maxlength: 50, required:true },
+			txEmergencyName:						{ maxlength: 80, required:true },
+			slEmergencyKin:							{ maxlength: 20, required:true },
+			txEmergencyPhone:						{ maxlength: 20, required:true }
 		},
 		messages: {
 			txpatientsname: {
@@ -64,6 +68,22 @@ $(function () {
 			},
 			slpatientssex: {
 				required:'Seleccione Sexo',
+			},
+			txbirthplace: {
+				required:'Lugar de Nacimiento',
+				maxlength:'Longitud Maxima de 50 caracteres'
+			},
+			txEmergencyName: {
+				required:'Nombre del Contacto',
+				maxlength:'Longitud Maxima de 80 caracteres'
+			},
+			slEmergencyKin: {
+				required:'Parentesco del Contacto',
+				maxlength:'Longitud Maxima de 20 caracteres'
+			},
+			txEmergencyPhone: {
+				required:'Telefono del Contacto',
+				maxlength:'Longitud Maxima de 20 caracteres'
 			}
 		},
 		showErrors: function (errorMap, errorList) {
@@ -121,7 +141,6 @@ $('#slpatientscountry').on('change', function(){
 				}
 			}
 		});
-
 	});
 
 	// Cargar informacion de paises
@@ -194,16 +213,22 @@ $('#slpatientscountry').on('change', function(){
 				type: 'PUT',
 				dataType: 'json',
 				data: {
-					'name': 					$('#txpatientsname').val(),
-					'lastname': 			$('#txpatientslastname').val(),
-					'identification': $('#txpatientsidentification').val(),
-					'ocupation': 			$('#slpatientsprofession').val(),
-					'city': 					$('#slpatientscity').val(),
-					'address': 				$('#txpatientsaddress').val(),
-					'phone': 					$('#txpatientsphone').val(),
-					'email': 					$('#txpatientsemail').val(),
-					'birthday': 			$('#txpatientsbirthday').val(),
-					'sex': 						$('#slpatientssex').val()
+					'name': 						$('#txpatientsname').val(),
+					'lastname': 				$('#txpatientslastname').val(),
+					'identification': 	$('#txpatientsidentification').val(),
+					'ocupation': 				$('#slpatientsprofession').val(),
+					'city': 						$('#slpatientscity').val(),
+					'id_civil_status': 	$('#slpatientscivilstatus').val(),
+					'id_profession': 		$('#slpatientsprofession').val(),
+					'address': 					$('#txpatientsaddress').val(),
+					'phone': 						$('#txpatientsphone').val(),
+					'email': 						$('#txpatientsemail').val(),
+					'birthday': 				$('#txpatientsbirthday').val(),
+					'sex': 							$('#slpatientssex').val(),
+					'emergency_phone': 	$('#txpatientsphone').val(),
+					'emergency_name': 	$('#txEmergencyName').val(),
+					'emergency_kin': 		$('#slEmergencyKin').val(),
+					'birthplace': 			$('#txbirthplace').val()
 				},
 				success: function(data) {
 					if(data.success){

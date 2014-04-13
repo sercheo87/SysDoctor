@@ -38,9 +38,9 @@ block content
 			.panel-heading.clearfix
 				h4#lbtitlegeneralinformation.panel-title.pull-left
 				.btn-group.btn-group-sm.pull-right
-					a#itemAddInfo.btn.btn-default(href='#', data-toggle='modal', data-target='#mdlMedInfoBase')
+					a#itemAddInfo.btn.btn-default
 						i.fa.fa-plus-square
-					a#itemEditInfo.btn.btn-default(href='#', data-toggle='modal', data-target='#mdlMedInfoBase') 
+					a#itemEditInfo.btn.btn-default
 						i.fa.fa-edit
 			.panel-body
 				#ctnTblCtrlMedic.col-md-12
@@ -75,10 +75,12 @@ block content
 			.panel-heading.clearfix
 				h4#lbtitlecontrol.panel-title.pull-left
 				.btn-group.btn-group-sm.pull-right
-					a#itemAddControl.btn.btn-default(href='#', data-toggle='modal', data-target='#mdlMedAppointment')
+					span#itemAddControl.btn.btn-default
 						i.fa.fa-plus-square
 					span#itemFilter.btn.btn-default
 						i.fa.fa-filter
+					span#itemPrint.btn.btn-primary
+						i.fa.fa-print
 			.panel-body
 				#ctnTblControl.col-md-12
 				form#frMedConDetail.form(role='form')
@@ -182,10 +184,10 @@ block content
 
 					//dialog buttons 
 					.modal-footer
-						button#btcancelGeneralMedGen.btn.btn-default(type='submit')
+						button#btcancelGeneralMedGen.btn.btn-default(type='button')
 							i.fa.fa-arrow-left
 							|  Cancelar
-						button#btnokGeneral.btn.btn-primary(type='button')
+						button#btokGeneralMedGen.btn.btn-primary(type='button')
 							i.fa.fa-floppy-o
 							|  Grabar
 		//-----------------------------------------------------------------------------------

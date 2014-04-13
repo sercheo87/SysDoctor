@@ -11,19 +11,23 @@ exports.addPatient=function(req, res) {
 		if(count==0){
 			//Usuario no encontrado se registrara
 			db.models.tbpatient.create([{
-				address: req.body.address,
-				email: req.body.email,
-				id_city: 1,
-				id_civil_status: 1,
-				id_education: 1,
-				id_profession: 1,
-				identification: req.body.identification,
-				last_name: req.body.lastname,
-				name: req.body.name,
-				ocupation: req.body.ocupation,
-				phone: req.body.phone,
-				birthday: req.body.birthday,
-				sex: req.body.sex
+				address 				: req.body.address,
+				email 					: req.body.email,
+				id_city 				: req.body.city,
+				id_civil_status : req.body.id_civil_status,
+				id_education 		: 1,
+				id_profession 	: req.body.id_profession,
+				identification 	: req.body.identification,
+				last_name 			: req.body.lastname,
+				name 						: req.body.name,
+				ocupation 			: req.body.ocupation,
+				phone 					: req.body.phone,
+				birthday 				: req.body.birthday,
+				sex 						: req.body.sex,
+				emergency_phone : req.body.emergency_phone,
+				emergency_name 	: req.body.emergency_name,
+				emergency_kin 	: req.body.emergency_kin,
+				birthplace 			: req.body.birthplace
 			}],function(err,data){
 				if(err){
 					console.log([err], ['Error in Patient Added!']);
