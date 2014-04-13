@@ -19,6 +19,8 @@
     "moment": "~2.5.1",
     "browser-i18n": "~0.0.2",
     "x-editable": "~1.5.1",
-    "jquery-mockjax": "~1.5.3"
+    "jquery-mockjax": "~1.5.3",
+    "devbridge-autocomplete": "~1.2.9",
+    "jstimezonedetect": "~1.0.5"
   }
 }

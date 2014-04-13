@@ -1,7 +1,23 @@
 extends ../site
 
 block content
-  .container.theme-showcase(role='main').col-md-10
-    .page-header
-      h1=title
-    h3 hola me logeed
+	.container.theme-showcase(role='main').col-md-10
+		.page-header
+			h3=title
+
+		.row
+			.pull-right
+				.btn-group
+					button.btn.btn-primary(data-calendar-nav='prev') Previo
+					button.btn.btn-default(data-calendar-nav='today') Actual
+					button.btn.btn-primary(data-calendar-nav='next') Siguiente
+			.pull-left
+				.btn-group
+					button.btn.btn-warning(data-calendar-view='year') Año
+					button.btn.btn-warning.active(data-calendar-view='month') Mes
+					button.btn.btn-warning(data-calendar-view='week') Semana
+					button.btn.btn-warning(data-calendar-view='day') Dia
+		
+		.row
+			.col-md-12
+				.calendar

@@ -7,7 +7,7 @@ module.exports = function(app, data_init){
 
 	// Administracion
 	var administration = require('../app/controllers/ctrl_administration');
-	app.get('/administration', csrf, administration.index);
+	app.get('/administration', administration.index);
 
 	// Patients
 	var patients = require('../app/controllers/ctrl_patients');
@@ -49,6 +49,7 @@ module.exports = function(app, data_init){
 	app.put('/api/patients/add', csrf, api_patient.addPatient);
 	app.get('/api/patients/list', api_patient.getListPatient);
 	app.get('/api/patients/list/:identification', api_patient.getPatient);
+	app.get('/api/patients/searchLive*', api_patient.getListSearchPatient);
 
 	// Civil Status
 	var api_civilStatus=require('../app/apis/api_civilStatus');
@@ -74,6 +75,7 @@ module.exports = function(app, data_init){
 
 	// Medical Appointments
 	var api_medicalAppointments=require('../app/apis/api_medicalAppointments');
+	app.get('/api/medical/appointments/calendar', api_medicalAppointments.getCalendarMedicalAppointments);
 	app.put('/api/medical/appointments/:idMedical', api_medicalAppointments.addMedicalAppointments);
 	app.get('/api/medical/appointments/:idAppointments', api_medicalAppointments.getMedicalAppointments);
 	app.get('/api/medical/appointments/list/:idMedical', api_medicalAppointments.getListMedicalAppointments);

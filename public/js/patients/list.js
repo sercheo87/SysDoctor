@@ -1,5 +1,5 @@
 $(function () {
-
+	$('.selectpicker').selectpicker();
 	$.ajax({
 		url: '/api/patients/list',
 		type: 'GET',

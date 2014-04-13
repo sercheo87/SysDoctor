@@ -65,7 +65,6 @@ exports.getPatient=function(req, res) {
 
 };
 
-
 /**
 * Get List Patient
 */
@@ -73,6 +72,25 @@ exports.getListPatient=function(req, res) {
 	console.log([req.params], ['-->>>>get list patient']);
 
 	db.models.tbpatient.find(function (err, people) {
+		console.log(people);
+		if(err){
+			console.log([err], ['Error in Getting Patients!']);
+			res.send({ 'success': false, 'msg' : 'Error obteniendo el paciente' });
+		}else{
+			console.log([people], ['Getting Patients!']);
+			res.send({ 'success': true, 'data' : people });
+		}
+	});
+
+};
+
+/**
+* Get List Search Patient
+*/
+exports.getListSearchPatient=function(req, res) {
+	console.log([req.query.param], ['-->>>>get list search patient']);
+
+	db.models.tbpatient.find().where("LOWER(name) LIKE ? OR LOWER(last_name) LIKE ? OR identification LIKE ? ", ['%'+req.query.param+'%','%'+req.query.param+'%','%'+req.query.param+'%']).all(function (err, people) {
 		console.log(people);
 		if(err){
 			console.log([err], ['Error in Getting Patients!']);

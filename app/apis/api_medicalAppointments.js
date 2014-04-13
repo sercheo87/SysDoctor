@@ -65,3 +65,23 @@ exports.getListMedicalAppointments=function(req, res) {
 	});
 
 };
+
+/**
+* Get Medical Appointments Calendar
+*/
+exports.getCalendarMedicalAppointments=function(req, res) {
+	console.log([req.params], ['-->>>>get Calendar medical Appointments Calendar']);
+	var events={
+		'success':'1',
+		'result':[
+		{
+			'id': '293',
+			'title': 'Juan Perez : Traumatologia',
+			'url': 'http://www.example.com/',
+			'class': 'event-important',
+			'start': new Date(2014, 4, 2, 11, 0, 0, 0).getTime(),
+			'end': new Date(2014, 4, 2, 11, 20, 0, 0).getTime()
+		}]
+	};
+	res.send(events);
+};

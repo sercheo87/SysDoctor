@@ -73,7 +73,7 @@ if ( ahora_mes < (mes - 1)) edad--;
 if (((mes - 1) == ahora_mes) && (ahora_dia < dia)) edad--;
 if (edad > 1900) edad -= 1900;
 if (edad<0) edad = 0
-return edad;
+	return edad;
 }
 
 /* Tooltip */
@@ -264,12 +264,26 @@ $(function () {
 	/* *************************************************************************************** */
 	$('.footable').footable();
 
-	/* Configuracion de Calendarios */
+	/* Busqueda interactiva de Pacientes */
 	/* *************************************************************************************** */
-	$(".calendar").calendar({
-		language: 'es-ES',
-		tmpl_path: "/components/bootstrap-calendar/tmpls/",
-		events_source: function () { return []; }
+	$('#txBarSearchPatient').autocomplete({
+		serviceUrl: '/api/patients/searchLive',
+		paramName: 'param',
+		width:300,
+		onSelect: function (suggestion) {
+			alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+		},
+		transformResult: function(response) {
+			response = JSON.parse(response).data;
+			return {
+				suggestions: $.map(response, function(item) {
+					return { value: $.format('{0} {1} [{2}]',item.last_name,item.name,item.identification), data: item };
+				})
+			};
+		},
+		onSelect: function(suggestion) {
+			window.location= ('/patients/detail/'+suggestion.data.identification);
+		}
 	});
 });
 
