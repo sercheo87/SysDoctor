@@ -53,7 +53,6 @@ exports.getPatient=function(req, res) {
 	console.log([req.params], ['-->>>>get patient']);
 
 	db.models.tbpatient.find({ identification: req.params.identification }, function (err, people) {
-		console.log(people);
 		if(err){
 			console.log([err], ['Error in Getting Patient!']);
 			res.send({ 'success': false, 'msg' : 'Error obteniendo el paciente' });
@@ -70,14 +69,12 @@ exports.getPatient=function(req, res) {
 */
 exports.getListPatient=function(req, res) {
 	console.log([req.params], ['-->>>>get list patient']);
-
 	db.models.tbpatient.find(function (err, people) {
-		console.log(people);
 		if(err){
 			console.log([err], ['Error in Getting Patients!']);
 			res.send({ 'success': false, 'msg' : 'Error obteniendo el paciente' });
 		}else{
-			console.log([people], ['Getting Patients!']);
+			//console.log([people], ['Getting Patients!']);
 			res.send({ 'success': true, 'data' : people });
 		}
 	});
@@ -91,12 +88,11 @@ exports.getListSearchPatient=function(req, res) {
 	console.log([req.query.param], ['-->>>>get list search patient']);
 
 	db.models.tbpatient.find().where("LOWER(name) LIKE ? OR LOWER(last_name) LIKE ? OR identification LIKE ? ", ['%'+req.query.param+'%','%'+req.query.param+'%','%'+req.query.param+'%']).all(function (err, people) {
-		console.log(people);
 		if(err){
 			console.log([err], ['Error in Getting Patients!']);
 			res.send({ 'success': false, 'msg' : 'Error obteniendo el paciente' });
 		}else{
-			console.log([people], ['Getting Patients!']);
+			//console.log([people], ['Getting Patients!']);
 			res.send({ 'success': true, 'data' : people });
 		}
 	});

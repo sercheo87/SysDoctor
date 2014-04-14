@@ -1,23 +1,72 @@
 extends ../site
 
+block js
+	script(type='text/javascript', src='/js/home/administration.js')
+
 block content
 	.container.theme-showcase(role='main').col-md-10
 		.page-header
 			h3=title
 
-		.row
-			.pull-right
-				.btn-group
+		.panel.panel-primary
+			.panel-heading.clearfix
+			
+				.btn-group.pull-right
 					button.btn.btn-primary(data-calendar-nav='prev') Previo
 					button.btn.btn-default(data-calendar-nav='today') Actual
 					button.btn.btn-primary(data-calendar-nav='next') Siguiente
-			.pull-left
-				.btn-group
+
+				.btn-group.pull-left
 					button.btn.btn-warning(data-calendar-view='year') Año
 					button.btn.btn-warning.active(data-calendar-view='month') Mes
 					button.btn.btn-warning(data-calendar-view='week') Semana
 					button.btn.btn-warning(data-calendar-view='day') Dia
-		
 		.row
 			.col-md-12
 				.calendar
+
+		#events-modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+			.modal-dialog
+				.modal-content
+					.modal-header
+						button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+						h4.modal-title Cita Medica
+					.modal-body
+						.detail
+					.modal-footer
+						button.btn.btn-default(type='button', data-dismiss='modal') Cerrar
+
+		#eventAddModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+			.modal-dialog
+				.modal-content
+					.modal-header
+						button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+						h4.modal-title Reserva de Citas Medicas
+					.modal-body
+						form.frEvent.form.form-horizontal(role='form')
+							.form-group
+								label(for='txEventPatient') Paciente
+								select#txEventPatient.form-control(type='text', idPatient='0', placeholder='Busqueda de Paciente')
+							.form-group
+								label(for='dateEvent') Fecha
+								#datetimepicker1.input-group
+									input#txEventDate.form-control(type='text')
+									span.input-group-addon
+										i.fa.fa-calendar
+							.row
+								label(for='slEventLevel') Nivel
+								select#slEventLevel.selectpicker.form-control.col-md-12
+									option(data-content='<span class="label label-danger">Importante</span>') important
+									option(data-content='<span class="label label-info">Normal</span>') info
+									option(data-content='<span class="label label-warning">Especial</span>') warning
+							.form-group
+								label(for='txEventNote') Observacion
+								textarea#txEventNote.form-control(type='text')
+
+					.modal-footer
+						button#btcancelEvent.btn.btn-default(type='button')
+							i.fa.fa-arrow-left
+							|  Cancelar
+						button#btokEvent.btn.btn-primary(type='button')
+							i.fa.fa-floppy-o
+							|  Grabar

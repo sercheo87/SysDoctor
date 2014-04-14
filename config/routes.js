@@ -75,7 +75,6 @@ module.exports = function(app, data_init){
 
 	// Medical Appointments
 	var api_medicalAppointments=require('../app/apis/api_medicalAppointments');
-	app.get('/api/medical/appointments/calendar', api_medicalAppointments.getCalendarMedicalAppointments);
 	app.put('/api/medical/appointments/:idMedical', api_medicalAppointments.addMedicalAppointments);
 	app.get('/api/medical/appointments/:idAppointments', api_medicalAppointments.getMedicalAppointments);
 	app.get('/api/medical/appointments/list/:idMedical', api_medicalAppointments.getListMedicalAppointments);
@@ -87,7 +86,11 @@ module.exports = function(app, data_init){
 	app.get('/api/medical/recipes/:idAppointments', api_recipes.getRecipes);
 	app.get('/api/medical/recipes/list/:idAppointments', api_recipes.getLisRecipes);
 
-
+	// Events
+	var api_events=require('../app/apis/api_events');
+	app.put('/api/events/add', api_events.addEvent);
+	app.get('/api/events/list', api_events.getAllEvents);
+	
 	app.all('*', function(req, res){
 		res.send(404);
 	})

@@ -22,3 +22,4 @@ var MdlPatient = db.define('tbpatient', {
 }, {
 	id:'id_patient'
 });
+MdlPatient.sync();

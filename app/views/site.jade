@@ -2,7 +2,6 @@ extends layout
 
 block jsmaster
 	script(type='text/javascript', src='/js/tmpl/menu.js')
-	script(type='text/javascript', src='/js/home/administration.js')
 
 block content_master
 	.row.row-offcanvas.row-offcanvas-right
@@ -12,7 +11,7 @@ block content_master
 			block content
 		#sidebar.col-xs-6.col-sm-3.col-md-3.sidebar-offcanvas(role='navigation')
 			.list-group
-				a.list-group-item.active(href='#') Link
+				a#addEvent.list-group-item.active(href='#') Agregar Cita
 			block options
 				#pnl_menu.panel-group
 

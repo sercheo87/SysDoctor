@@ -5,10 +5,16 @@ var Sync = require('sql-ddl-sync').Sync;
 
 module.exports = function(orm){
 
+	db.settings.set("properties.association_key", "{field}");
+
 	db.models.tbcity.hasOne('country', db.models.tbcountry,{required: true});
-	db.models.tbcity.sync();
 	db.models.tbmedicine.hasOne('groupmedicine', db.models.tbgroupmedicine,{required: true});
+	db.models.tbevents.hasOne('patient', db.models.tbpatient);
+	
+	db.models.tbcity.sync();
+	db.models.tbpatient.sync();
 	db.models.tbmedicine.sync();
+	db.models.tbevents.sync();
 	db.sync();
 
 	var sync = new Sync({
@@ -41,78 +47,87 @@ module.exports = function(orm){
 		birthplace: 			{ type: 'text', required: true, size: 50 }
 	});
 
-	sync.defineCollection('tbusers', {
-		iduser: 		{ type: 'number', primary: true, serial: true },
-		name: 			{ type: 'text', required: true },
-		lastname: 	{ type: 'text', required: true },
-		datebirth: 	{ type: 'date', required: false, time: false },
-		state: 			{ type: 'boolean', required: true },
-		login: 			{ type: 'text', required: true },
-		pass: 			{ type: 'text', required: true }
-	});
+sync.defineCollection('tbusers', {
+	iduser: 		{ type: 'number', primary: true, serial: true },
+	name: 			{ type: 'text', required: true },
+	lastname: 	{ type: 'text', required: true },
+	datebirth: 	{ type: 'date', required: false, time: false },
+	state: 			{ type: 'boolean', required: true },
+	login: 			{ type: 'text', required: true },
+	pass: 			{ type: 'text', required: true }
+});
 
-	sync.defineCollection('tbcivilstatus', {
-		id: 					{ type: 'number', primary: true, serial: true },
-		description: 	{ type: 'text', required: true }
-	});
+sync.defineCollection('tbcivilstatus', {
+	id: 					{ type: 'number', primary: true, serial: true },
+	description: 	{ type: 'text', required: true }
+});
 
-	sync.defineCollection('tbprofession', {
-		id: 					{ type: 'number', primary: true, serial: true },
-		description: 	{ type: 'text', required: true }
-	});
+sync.defineCollection('tbprofession', {
+	id: 					{ type: 'number', primary: true, serial: true },
+	description: 	{ type: 'text', required: true }
+});
 
-	sync.defineCollection('tbcountry', {
-		id: 					{ type: 'number', primary: true, serial: true },
-		description: 	{ type: 'text', required: true }
-	});
+sync.defineCollection('tbcountry', {
+	id: 					{ type: 'number', primary: true, serial: true },
+	description: 	{ type: 'text', required: true }
+});
 
-	sync.defineCollection('tbcity', {
-		id: 					{ type: 'number', primary: true, serial: true },
-		country_id: 	{ type: 'number' },
-		description: 	{ type: 'text', required: true }
-	});
+sync.defineCollection('tbcity', {
+	id: 					{ type: 'number', primary: true, serial: true },
+	country_id: 	{ type: 'number' },
+	description: 	{ type: 'text', required: true }
+});
 
-	sync.defineCollection('tbmedicine', {
-		id: 								{ type: 'number', primary: true, serial: true },
-		groupmedicine_id: 	{ type: 'number' },
-		description: 				{ type: 'text', required: true }
-	});
+sync.defineCollection('tbmedicine', {
+	id: 								{ type: 'number', primary: true, serial: true },
+	groupmedicine_id: 	{ type: 'number' },
+	description: 				{ type: 'text', required: true }
+});
 
-	sync.defineCollection('tbgroupmedicine', {
-		id: 					{ type: 'number', primary: true, serial: true },
-		description: 	{ type: 'text', required: true }
-	});
+sync.defineCollection('tbgroupmedicine', {
+	id: 					{ type: 'number', primary: true, serial: true },
+	description: 	{ type: 'text', required: true }
+});
 
-	sync.defineCollection('tbmedicalrecord', {
-		id_medical: 	{ type: 'number', primary: true, serial: true },
-		id_patient: 	{ type: 'number', unique: true },
-		habit: 				{ type: 'text', required: false, size: 500, defaultValue:'N/A' },
-		antecedent: 	{ type: 'text', required: false, size: 500, defaultValue:'N/A' },
-		alergy: 			{ type: 'text', required: false, size: 500, defaultValue:'N/A' },
-		date_reg: 		{ type: 'date', required: false, time: false },
-		observation: 	{ type: 'text', required: false, size: 500, defaultValue:'N/A' },
-		blood_type: 	{ type: 'text', required: false, size: 10, defaultValue:'N/A' }
-	});
+sync.defineCollection('tbmedicalrecord', {
+	id_medical: 	{ type: 'number', primary: true, serial: true },
+	id_patient: 	{ type: 'number', unique: true },
+	habit: 				{ type: 'text', required: false, size: 500, defaultValue:'N/A' },
+	antecedent: 	{ type: 'text', required: false, size: 500, defaultValue:'N/A' },
+	alergy: 			{ type: 'text', required: false, size: 500, defaultValue:'N/A' },
+	date_reg: 		{ type: 'date', required: false, time: false },
+	observation: 	{ type: 'text', required: false, size: 500, defaultValue:'N/A' },
+	blood_type: 	{ type: 'text', required: false, size: 10, defaultValue:'N/A' }
+});
 
-	sync.defineCollection('tbmedicalappointments', {
-		id_appointments: 		{ type: 'number', primary: true, serial: true },
-		id_medical: 				{ type: 'number'},
-		date_reg: 					{ type: 'date', required: false, time: true },
-		rweight: 						{ type: 'number', required: true },
-		rsize: 							{ type: 'number', required: true },
-		pulse: 							{ type: 'number', required: true },
-		blood_pressure: 		{ type: 'text', required: true },
-		reason: 						{ type: 'text', required: true },
-		observation: 				{ type: 'text', required: true }
-	});
+sync.defineCollection('tbmedicalappointments', {
+	id_appointments: 		{ type: 'number', primary: true, serial: true },
+	id_medical: 				{ type: 'number'},
+	date_reg: 					{ type: 'date', required: false, time: true },
+	rweight: 						{ type: 'number', required: true },
+	rsize: 							{ type: 'number', required: true },
+	pulse: 							{ type: 'number', required: true },
+	blood_pressure: 		{ type: 'text', required: true },
+	reason: 						{ type: 'text', required: true },
+	observation: 				{ type: 'text', required: true }
+});
 
-	sync.defineCollection('tbrecipes', {
-		id_recipes: 			{ type: 'number', primary: true, serial: true },
-		id_appointments: 	{ type: 'number'},
-		medicine: 				{ type: 'text', required: true },
-		dose: 						{ type: 'text', required: true },
-		observation: 			{ type: 'text', required: true }
-	});
+sync.defineCollection('tbrecipes', {
+	id_recipes: 			{ type: 'number', primary: true, serial: true },
+	id_appointments: 	{ type: 'number'},
+	medicine: 				{ type: 'text', required: true },
+	dose: 						{ type: 'text', required: true },
+	observation: 			{ type: 'text', required: true }
+});
+
+sync.defineCollection('tbevents', {
+	id_events: 			{ type: 'number', primary: true, serial: true },
+	id_patient: 		{ type: 'number'},
+	eventstart: 		{ type: 'date', required: false, time: true },
+	level: 					{ type: 'text', required: true },
+	observation: 		{ type: 'text', required: false },
+	confirmed: 			{ type :'boolean', required: false }
+});
 
 	//db.drop(function(){
 		sync.sync(function (err) {

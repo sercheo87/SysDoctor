@@ -260,6 +260,9 @@ var i18n = new I18n({
 /* *************************************************************************************** */
 $(function () {
 
+	/* Selects */
+	$('.selectpicker').selectpicker('render');
+
 	/* Configuracion de Tablas Responsive Design */
 	/* *************************************************************************************** */
 	$('.footable').footable();
