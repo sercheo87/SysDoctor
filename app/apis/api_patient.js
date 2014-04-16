@@ -33,7 +33,7 @@ exports.addPatient=function(req, res) {
 					console.log([err], ['Error in Patient Added!']);
 					res.send({ 'success': false, 'msg' : 'Error en registro del paciente' });
 				}else{
-					console.log([data], ['Patient Added!']);
+					console.log(['Patient Added!']);
 					res.send({ 'success': true, 'msg' : 'Usuario registrado'});
 				}
 			});
@@ -57,7 +57,7 @@ exports.getPatient=function(req, res) {
 			console.log([err], ['Error in Getting Patient!']);
 			res.send({ 'success': false, 'msg' : 'Error obteniendo el paciente' });
 		}else{
-			console.log([people], ['Getting Patient!']);
+			console.log(['Getting Patient!']);
 			res.send({ 'success': true, 'data' : people });
 		}
 	});
@@ -74,7 +74,7 @@ exports.getListPatient=function(req, res) {
 			console.log([err], ['Error in Getting Patients!']);
 			res.send({ 'success': false, 'msg' : 'Error obteniendo el paciente' });
 		}else{
-			//console.log([people], ['Getting Patients!']);
+			console.log(['Getting Patients!']);
 			res.send({ 'success': true, 'data' : people });
 		}
 	});
@@ -92,7 +92,7 @@ exports.getListSearchPatient=function(req, res) {
 			console.log([err], ['Error in Getting Patients!']);
 			res.send({ 'success': false, 'msg' : 'Error obteniendo el paciente' });
 		}else{
-			//console.log([people], ['Getting Patients!']);
+			console.log(['Getting Patients!']);
 			res.send({ 'success': true, 'data' : people });
 		}
 	});

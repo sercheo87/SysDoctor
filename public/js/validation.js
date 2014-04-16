@@ -58,7 +58,7 @@ function parseNumeric(value, decimalSeparator) {
 /* Alphabetic */
 $.fn.validateAlphabetic = function (allowSpacebar) {
 	$(this).keypress(function (e) {
-		var reggex = /[a-zA-ZñÑáéíóúÁÉÍÓÚäëïöüÄËÏÖÜàèìòùÀÈÌÒÙ]/;
+		var reggex = /[-+a-zA-ZñÑáéíóúÁÉÍÓÚäëïöüÄËÏÖÜàèìòùÀÈÌÒÙ]/;
 		return validateKeyPress(e, reggex, allowSpacebar);
 	});
 	$(this).blur(function (e) {
@@ -68,7 +68,7 @@ $.fn.validateAlphabetic = function (allowSpacebar) {
 
 $.fn.validateAlphanumeric = function (allowSpacebar) {
 	$(this).keypress(function (e) {
-		var reggex = /[0-9a-zA-ZñÑáéíóúÁÉÍÓÚäëïöüÄËÏÖÜàèìòùÀÈÌÒÙ]/;
+		var reggex = /[-+0-9a-zA-ZñÑáéíóúÁÉÍÓÚäëïöüÄËÏÖÜàèìòùÀÈÌÒÙ]/;
 		return validateKeyPress(e, reggex, allowSpacebar);
 	});
 	$(this).blur(function (e) {

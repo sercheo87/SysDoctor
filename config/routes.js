@@ -91,6 +91,16 @@ module.exports = function(app, data_init){
 	app.put('/api/events/add', api_events.addEvent);
 	app.get('/api/events/list', api_events.getAllEvents);
 	
+	// Diet Group
+	var api_diet_group=require('../app/apis/api_diet_group');
+	app.put('/api/diet/group/add', api_diet_group.addDiet_Group);
+	app.get('/api/diet/group/list/detail', api_diet_group.getAllDiet_Group);
+	
+	// Diet Detail
+	var api_diet_detail=require('../app/apis/api_diet_detail');
+	app.put('/api/diet/detail/add', api_diet_detail.addDiet_Detail);
+	app.get('/api/diet/detail/list/:idMedical', api_diet_detail.getAllDiet_GroupList);
+
 	app.all('*', function(req, res){
 		res.send(404);
 	})

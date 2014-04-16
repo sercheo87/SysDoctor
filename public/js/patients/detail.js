@@ -74,12 +74,11 @@ $(function () {
 					}
 				}
 			});
-			$('#mdlMedInfoBase').modal('hide');
 		}
 	});
 
 	$('#btcancelGeneralMedGen').click(function(event) {
-		$('#mdlMedInfoBase').modal('hide');
+		GetMedicalInformation();
 	});
 	/* ---------------------------------------------------------------------- */
 
@@ -177,7 +176,6 @@ $(function () {
 		data: {},
 		success: function(data) {
 			if(data.success){
-				console.log('data success',data);
 				$('#pName').text(data.data[0].name);
 				$('#pJob').text(data.data[0].ocupation);
 				$('#pYearsOld').text(calcularEdad(data.data[0].birthday.substring(0,10)));
@@ -192,7 +190,6 @@ $(function () {
 				var age = parseInt((hoy -fecha)/365/24/60/60/1000);
 
 			}else{
-				console.log('data error',data);
 				AlertShow('warning',data.msg);
 			}
 		}
@@ -204,20 +201,6 @@ $(function () {
 	$('#itemFilter').setTooltip('Filtro de informacion');
 	$('#itemAddControl').setTooltip('Agregar Control Medico');
 	$('#itemPrint').setTooltip('Imprimir Receta');
-	$('#itemAddInfo').setTooltip('Agregar Informacion Medica');
-	$('#itemEditInfo').setTooltip('Editar Informacion Medica');
-
-	$('#itemAddInfo').click(function(event) {
-		$('#mdlMedInfoBase').modal({
-			keyboard: true
-		});
-	});
-
-	$('#itemEditInfo').click(function(event) {
-		$('#mdlMedInfoBase').modal({
-			keyboard: true
-		});
-	});
 
 	$('#itemFilter').click(function(event) {
 		var $this = $(this), 
@@ -237,8 +220,6 @@ $(function () {
 				}
 			});
 
-	$('#frMedConDetail').hide();
-
 	$('#itemAddControl').click(function(event) {
 		EnableButttonDetMedical(true);
 	});
@@ -248,6 +229,7 @@ $(function () {
 		event.preventDefault();
 		window.open('/receipt/inquiry/5', "popupWindow", "width=600,height=600,scrollbars=yes");
 	});
+
 });//jquery
 
 function EnableButttonDetMedical(state){
@@ -275,7 +257,6 @@ function GetMedicalAppointments(idMedical){
 		data: {},
 		success: function(data) {
 			if(data.success){
-				console.log('data success',data);
 				var options={
 					columns:[
 					{id:'id_appointments', text:'Reg.'},
@@ -302,7 +283,6 @@ function GetMedicalAppointments(idMedical){
 				createTable('#ctnTblControl',options);
 
 			}else{
-				console.log('data error',data);
 			}
 		}
 	});
@@ -317,8 +297,6 @@ function GetMedicalAppointmentsDetail(idAppointments){
 		data: {},
 		success: function(data) {
 			if(data.success){
-				console.log('data success',data);
-
 				var m = moment(data.data[0].date_reg);
 
 				$('#tx_mcd_id').val(idAppointments);
@@ -333,7 +311,6 @@ function GetMedicalAppointmentsDetail(idAppointments){
 				EnableButttonDetMedical(true);
 				GetRecipes();
 			}else{
-				console.log('data error',data);
 			}
 		}
 	});
@@ -365,7 +342,6 @@ function AddRecipes(){
 }
 
 function RemoveRecipes(idRecipe){
-	console.log('remove recipe');
 	$.ajax({
 		url: '/api/medical/recipes/'+idRecipe,
 		type: 'DELETE',
@@ -430,14 +406,12 @@ function GetRecipes(){
 		data: {},
 		success: function(data) {
 			if(data.success){
-				console.log('GetRecipes: data success',data);
 				$.each(data.data, function (index, value) {
 					row +=$.format(rowLabel,value.medicine,value.dose,value.observation,value.id_recipes);
 				});
 				row+=rowEdit;
 				$('#tbl_recipe > tbody').html(row);
 			}else{
-				console.log('GetRecipes: data error',data);
 				row+=rowEdit;
 				$('#tbl_recipe > tbody').html(row);
 			}
@@ -455,7 +429,6 @@ function GetMedicalInformation(){
 		data: {},
 		success: function(data) {
 			if(data.success){
-				console.log('data success',data);
 				if(data.data.length>0)
 				{
 					$('#tx_med_habit').val(data.data[0].habit);
@@ -469,18 +442,11 @@ function GetMedicalInformation(){
 					$('#tx_med_e_alergy').val(data.data[0].alergy);
 					$('#tx_med_e_bloodtype').val(data.data[0].blood_type);
 					$('#tx_med_e_eobservation').val(data.data[0].observation);
-					//$('#itemAddInfo').attr('disabled', 'disabled');
 					$('#tx_medical').val(data.data[0].id_medical);
 
 					GetMedicalAppointments(data.data[0].id_medical);
-				}else{
-					$('#TblCtrlMedic > .panel-body > #ctnTblCtrlMedic').addAlertMessage('warning',i18n.__('msg_registers_not_found'));
-					$('#TblCtrlMedic > .panel-body > #ctnTblCtrlMedic > .form').hide();
 				}
 			}else{
-				console.log('data error',data);
-					//$('#itemEditControl').attr('disabled', 'disabled');
-					//$('#itemAddInfo').show();
 					AlertShow('warning',data.msg);
 				}
 			}

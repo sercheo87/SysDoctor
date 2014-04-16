@@ -9,82 +9,76 @@ block content
 			h2=title
 
 		//Nav tabs 
-		ul.nav.nav-tabs
+		ul#myTab.nav.nav-tabs
 			li.active
-				a(href='#pnlInformation', data-toggle='tab') #lbtitlepersonalinformation
+				a(href='#pnlInformation', data-toggle='tab') Informacion Personal
 			li
-				a(href='#ctnTblCtrlMedic', data-toggle='tab') #lbtitlegeneralinformation
+				a(href='#ctnTblCtrlMedic', data-toggle='tab') Informacion General
 			li
 				a(href='#messages', data-toggle='tab') Messages
 			li
 				a(href='#settings', data-toggle='tab') Settings
 		//Tab panes 
 		.tab-content
-			#pnlInformation.tab-pane.active
-				.form-horizontal
-					input#tx_patient(type='hidden')
-					input#tx_medical(type='hidden')
-					.row
-						.col-xs-12.col-sm-6.col-md-6
-							.form-group
-								label#lbName.col-xs-6.col-sm-6.control-label
-								.col-xs-6.col-sm-6
+			#pnlInformation.tab-pane.fade.active.in
+				.panel.panel-default
+					.panel-body
+						.form-horizontal
+							input#tx_patient(type='hidden')
+							input#tx_medical(type='hidden')
+							.row
+								.col-xs-12.col-sm-6.col-md-6
+									label#lbName.control-label
 									p#pName.form-control-static
-						.col-xs-12.col-sm-6.col-md-6
-							.form-group
-								label#lbYearsOld.col-xs-6.col-sm-6.control-label
-								.col-xs-6.col-sm-6
+								.col-xs-12.col-sm-6.col-md-6
+									label#lbYearsOld.control-label
 									p#pYearsOld.form-control-static
-						.col-xs-12.col-sm-6.col-md-6
-							.form-group
-								label#lbSex.col-xs-6.col-sm-6.control-label
-								.col-xs-6.col-sm-6
+								.col-xs-12.col-sm-6.col-md-6
+									label#lbSex.control-label
 									p#pSex.form-control-static
-						.col-xs-12.col-sm-6.col-md-6
-							.form-group
-								label#lbJob.col-xs-6.col-sm-6.control-label
-								.col-xs-6.col-sm-6
+								.col-xs-12.col-sm-6.col-md-6
+									label#lbJob.control-label
 									p#pJob.form-control-static
-			#ctnTblCtrlMedic.tab-pane
-					.form(role='form')
-						.row
-							.col-md-6
-								.form-group
-									label.control-label(for='tx_med_e_habit') Habitos
-									input#tx_med_e_habit.form-control(type='text', placeholder='Habitos', disabled='disabled')
 
-							.col-md-6
-								.form-group
-									label.control-label(for='tx_med_e_antecedent') Antecedentes
-									input#tx_med_e_antecedent.form-control(type='text', placeholder='Antecedentes Familiares', disabled='disabled')
+			#ctnTblCtrlMedic.tab-pane.fade
+				.panel.panel-default
+					.panel-body
+						form#frMedical.form-horizontal.form(role='form')
+							.row
+								.col-md-6
+									label.control-label(for='tx_med_habit') Habitos
+									input#tx_med_habit.form-control.spaced-alphanumeric(type='text', placeholder='Habitos')
+								.col-md-6
+									label.control-label(for='tx_med_antecedent') Antecedentes
+									input#tx_med_antecedent.form-control.spaced-alphanumeric(type='text', placeholder='Antecedentes Familiares')
+								.col-md-6
+									label.control-label(for='tx_med_alergy') Alergias
+									input#tx_med_alergy.form-control.spaced-alphanumeric(type='text', placeholder='Alergias')
+								.col-md-6
+									label.control-label(for='tx_med_bloodtype') Tipo de Sangre
+									input#tx_med_bloodtype.form-control.alphanumeric(type='text', placeholder='Tipo de Sangre')
+								.col-md-12
+									label.control-label(for='tx_med_observation') Observacion
+									textarea#tx_med_observation.form-control.spaced-alphanumeric(type='text', placeholder='Observacion')
+								.col-md-12
+									br
+									a#btcancelGeneralMedGen.btn.btn-default(type='button')
+										i.fa.fa-arrow-left
+										|  Cancelar
+									a#btokGeneralMedGen.btn.btn-primary(type='button')
+										i.fa.fa-floppy-o
+										|  Grabar
 
-							.col-md-6
-								.form-group
-									label.control-label(for='tx_med_e_alergy') Alergias
-									input#tx_med_e_alergy.form-control(type='text', placeholder='Alergias', disabled='disabled')
+			#messages.tab-pane.fade
+				.panel.panel-default
+					.panel-body
+						...
+			#settings.tab-pane.fade
+				.panel.panel-default
+					.panel-body
+						...
 
-							.col-md-6
-								.form-group
-									label.control-label(for='tx_med_e_bloodtype') Tipo de Sangre
-									input#tx_med_e_bloodtype.form-control(type='text', placeholder='Tipo de Sangre', disabled='disabled')
-
-							.col-md-12
-								.form-group
-									label.control-label(for='tx_med_e_eobservation') Observacion
-									textarea#tx_med_e_eobservation.form-control(type='text', placeholder='Observacion', disabled='disabled')
-
-			#messages.tab-pane ...
-			#settings.tab-pane ...
-
-		#TblCtrlMedic.panel.panel-default
-			.panel-heading.clearfix
-
-				.btn-group.btn-group-sm.pull-right
-					a#itemAddInfo.btn.btn-default
-						i.fa.fa-plus-square
-					a#itemEditInfo.btn.btn-default
-						i.fa.fa-edit
-			.panel-body
+		br
 
 		.panel.panel-default
 			.panel-heading.clearfix
@@ -140,13 +134,13 @@ block content
 								label.control-label(for='tx_mcd_observation') Observaciones
 								textarea#tx_mcd_observation.form-control(name='tx_mcd_observation',type='text', placeholder='Observaciones')
 
+					a#btcancelMedAppointment.btn.btn-default(type='button')
+						i.fa.fa-arrow-circle-o-left
+						|  Cancelar
+
 					a#btokMedAppointment.btn.btn-primary(type='button')
 						i.fa.fa-floppy-o
 						|  Grabar
-
-					a#btcancelMedAppointment.btn.btn-primary(type='button')
-						i.fa.fa-arrow-circle-o-left
-						|  Cancelar
 					hr
 					fieldset
 						table#tbl_recipe.table.table-hover
@@ -161,51 +155,7 @@ block content
 										| Nota
 							tbody
 
-		//mdlMedInfoBase
-		#mdlMedInfoBase.modal.fade
-			.modal-dialog
-				.modal-content
-					.modal-header
-						button.close(type='button', data-dismiss='modal') ×
-						h4.modal-title Registro Inicial del Paciente
-					.modal-body
-						form#frMedical.form-horizontal.form(role='form')
-
-							.form-group
-								label.control-label.col-md-4(for='tx_med_habit') Habitos
-								.col-md-8
-									input#tx_med_habit.form-control.alphanumeric(type='text', placeholder='Habitos')
-
-							.form-group
-								label.control-label.col-md-4(for='tx_med_antecedent') Antecedentes
-								.col-md-8
-									input#tx_med_antecedent.form-control.alphanumeric(type='text', placeholder='Antecedentes Familiares')
-
-							.form-group
-								label.control-label.col-md-4(for='tx_med_alergy') Alergias
-								.col-md-8
-									input#tx_med_alergy.form-control.alphanumeric(type='text', placeholder='Alergias')
-
-							.form-group
-								label.control-label.col-md-4(for='tx_med_bloodtype') Tipo de Sangre
-								.col-md-8
-									input#tx_med_bloodtype.form-control.alphanumeric(type='text', placeholder='Tipo de Sangre')
-
-							.form-group
-								label.control-label.col-md-4(for='tx_med_observation') Observacion
-								.col-md-8
-									textarea#tx_med_observation.form-control.alphanumeric(type='text', placeholder='Observacion')
-
-
-					//dialog buttons 
-					.modal-footer
-						button#btcancelGeneralMedGen.btn.btn-default(type='button')
-							i.fa.fa-arrow-left
-							|  Cancelar
-						button#btokGeneralMedGen.btn.btn-primary(type='button')
-							i.fa.fa-floppy-o
-							|  Grabar
-		//-----------------------------------------------------------------------------------
+		include ../diet/list
 
 	script(type='text/javascript').
 		var dataPatient = !{JSON.stringify(dataId)};

@@ -20,7 +20,7 @@ exports.addMedicalAppointments=function(req, res) {
 			console.log([err], ['Error in Medical Appointments Added!']);
 			res.send({ 'success': false, 'msg' : 'Error en registro de cita medica' });
 		}else{
-			console.log([data], ['Medical Appointments Added!']);
+			console.log(['Medical Appointments Added!']);
 			res.send({ 'success': true, 'msg' : 'Registro Medico registrado'});
 		}
 	});
@@ -34,12 +34,11 @@ exports.getMedicalAppointments=function(req, res) {
 	console.log([req.params], ['-->>>>get medical appointments record']);
 
 	db.models.tbmedicalappointments.find({ id_appointments: req.params.idAppointments }, function (err, record) {
-		console.log(record);
 		if(err){
 			console.log([err], ['Error in Getting Medical Record!']);
 			res.send({ 'success': false, 'msg' : 'Error obteniendo registro medica' });
 		}else{
-			console.log([record], ['Getting Medical Record!']);
+			console.log(['Getting Medical Record!']);
 			res.send({ 'success': true, 'data' : record });
 		}
 	});
@@ -54,12 +53,11 @@ exports.getListMedicalAppointments=function(req, res) {
 	console.log([req.params], ['-->>>>get list medical Appointments']);
 
 	db.models.tbmedicalappointments.find({ id_medical: req.params.idMedical }).order('-id_appointments').all( function (err, record) {
-		console.log(record);
 		if(err){
 			console.log([err], ['Error in Getting Medical Appointments!']);
 			res.send({ 'success': false, 'msg' : 'Error obteniendo registro medica' });
 		}else{
-			console.log([record], ['Getting Medical Appointments!']);
+			console.log(['Getting Medical Appointments!']);
 			res.send({ 'success': true, 'data' : record });
 		}
 	});
