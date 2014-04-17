@@ -41,3 +41,21 @@ exports.getAllDiet_GroupList=function(req, res) {
 	});
 
 };
+
+/**
+* Get All Diet_GroupDetail
+*/
+exports.removeDiet_Group=function(req, res) {
+	console.log([req.params], ['-->>>>remove diet removeDiet_Group']);
+
+	db.models.tbdiet_detail.find({ id_diet_detail : req.params.idEvent }).remove(function (err, record) {
+		if(err){
+			console.log([err], ['Error in remove Diet Record!']);
+			res.send({ 'success': false, 'msg' : 'Error Borrando Dieta' });
+		}else{
+			console.log('Removing Diets!');
+			res.send({ 'success': true, 'msg' : 'Registro de dieta elimado'});
+		}
+	});
+
+};

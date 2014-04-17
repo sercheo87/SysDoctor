@@ -95,6 +95,7 @@ module.exports = function(app, data_init){
 	var api_diet_detail=require('../app/apis/api_diet_detail');
 	app.put('/api/diet/detail/add/:idMedical', csrf, api_diet_detail.addDiet_Detail);
 	app.get('/api/diet/detail/list/:idMedical', csrf, api_diet_detail.getAllDiet_GroupList);
+	app.del('/api/diet/remove/:idEvent', csrf, api_diet_detail.removeDiet_Group);
 
 	app.all('*', function(req, res){
 		res.send(404);
