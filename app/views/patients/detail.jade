@@ -15,9 +15,7 @@ block content
 			li
 				a(href='#ctnTblCtrlMedic', data-toggle='tab') Informacion General
 			li
-				a(href='#messages', data-toggle='tab') Messages
-			li
-				a(href='#settings', data-toggle='tab') Settings
+				a(href='#ctnDiet', data-toggle='tab') Dietas
 		//Tab panes 
 		.tab-content
 			#pnlInformation.tab-pane.fade.active.in
@@ -69,14 +67,10 @@ block content
 										i.fa.fa-floppy-o
 										|  Grabar
 
-			#messages.tab-pane.fade
+			#ctnDiet.tab-pane.fade
 				.panel.panel-default
 					.panel-body
-						...
-			#settings.tab-pane.fade
-				.panel.panel-default
-					.panel-body
-						...
+						include ../diet/list
 
 		br
 
@@ -84,12 +78,12 @@ block content
 			.panel-heading.clearfix
 				h4#lbtitlecontrol.panel-title.pull-left
 				.btn-group.btn-group-sm.pull-right
-					span#itemAddControl.btn.btn-default
-						i.fa.fa-plus-square
 					span#itemFilter.btn.btn-default
 						i.fa.fa-filter
-					span#itemPrint.btn.btn-primary
+					span#itemPrint.btn.btn-default
 						i.fa.fa-print
+					span#itemAddControl.btn.btn-primary
+						i.fa.fa-plus-square
 			.panel-body
 				#ctnTblControl.col-md-12
 				form#frMedConDetail.form(role='form')
@@ -154,8 +148,6 @@ block content
 									th.text-center
 										| Nota
 							tbody
-
-		include ../diet/list
 
 	script(type='text/javascript').
 		var dataPatient = !{JSON.stringify(dataId)};

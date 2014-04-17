@@ -10,7 +10,6 @@ module.exports = function(orm){
 	db.models.tbcity.hasOne('country', db.models.tbcountry,{required: true});
 	db.models.tbmedicine.hasOne('groupmedicine', db.models.tbgroupmedicine,{required: true});
 	db.models.tbevents.hasOne('patient', db.models.tbpatient);
-	db.models.tbdiet_detail.hasOne('diet_group', db.models.tbdiet_group, {reverse: 'dietdetail'});
 	
 	db.models.tbcity.sync();
 	db.models.tbpatient.sync();
@@ -130,15 +129,11 @@ sync.defineCollection('tbevents', {
 	confirmed: 			{ type :'boolean', required: false }
 });
 
-sync.defineCollection('tbdiet_group', {
-	id_diet_group: 	{ type: 'number', primary: true, serial: true },
-	name: 					{ type: 'text', required: 'true' }
-});
-
 sync.defineCollection('tbdiet_detail', {
 	id_diet_detail: 	{ type: 'number', primary: true, serial: true },
-	id_diet_group: 		{ type: 'number' },
 	id_medical: 			{ type: 'number' },
+	hour_start: 			{ type: 'text', required: 'false' },
+	hour_end: 				{ type: 'text', required: 'false' },
 	dmon: 						{ type: 'text', required: 'false' },
 	dtue: 						{ type: 'text', required: 'false' },
 	dwed: 						{ type: 'text', required: 'false' },

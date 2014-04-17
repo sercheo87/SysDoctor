@@ -1,5 +1,6 @@
 $(function () {
-
+	var dietIdRegister=0;
+	$('.datetimepicker').data('DateTimePicker').setDate(new Date());
 	/* ---------------------------------------------------------------------- */
 	/* Eventos Modales Registro de datos generales                            */
 	/* ---------------------------------------------------------------------- */
@@ -183,7 +184,10 @@ $(function () {
 				$('#tx_patient').val(data.data[0].id_patient);
 				id_patient=data.data[0].id_patient;
 
+				dietIdRegister=data.data[0].id_patient;
 				GetMedicalInformation()
+				//Cargar Dietas
+				listDietDetail(dietIdRegister);
 
 				var fecha = new Date(data.data[0].birthday.substring(0,10));
 				var hoy = new Date();
@@ -216,9 +220,9 @@ $(function () {
 		type: 'text',
 		title: 'Enter username',
 		success: function(response, newValue) {
-					userModel.set('username', newValue); //update backbone model
-				}
-			});
+						userModel.set('username', newValue); //update backbone model
+					}
+				});
 
 	$('#itemAddControl').click(function(event) {
 		EnableButttonDetMedical(true);
@@ -281,8 +285,6 @@ function GetMedicalAppointments(idMedical){
 				};
 
 				createTable('#ctnTblControl',options);
-
-			}else{
 			}
 		}
 	});
@@ -447,10 +449,10 @@ function GetMedicalInformation(){
 					GetMedicalAppointments(data.data[0].id_medical);
 				}
 			}else{
-					AlertShow('warning',data.msg);
-				}
+				AlertShow('warning',data.msg);
 			}
-		});
+		}
+	});
 }
 
 function loadLabels(){

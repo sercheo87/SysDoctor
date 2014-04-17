@@ -1,0 +1,36 @@
+#eventAddModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+	.modal-dialog
+		.modal-content
+			.modal-header
+				button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+				h4.modal-title Reserva de Citas Medicas
+			.modal-body
+				form.frEvent.form.form-horizontal(role='form')
+					.form-group
+						label(for='txEventPatient') Paciente
+						select#txEventPatient.form-control(type='text', idPatient='0', placeholder='Busqueda de Paciente')
+					.form-group
+						label(for='dateEvent') Fecha
+						#datetimepicker1.datetimepicker.input-group
+							input#txEventDate.form-control(type='text')
+							span.input-group-addon
+								i.fa.fa-calendar
+					.row
+						label(for='slEventLevel') Nivel
+						select#slEventLevel.selectpicker.form-control.col-md-12
+							option(data-content='<span class="label label-danger">Importante</span>') important
+							option(data-content='<span class="label label-info">Normal</span>') info
+							option(data-content='<span class="label label-warning">Especial</span>') warning
+					.form-group
+						label(for='txEventNote') Observacion
+						textarea#txEventNote.form-control(type='text')
+
+			.modal-footer
+				button#btcancelEvent.btn.btn-default(type='button')
+					i.fa.fa-arrow-left
+					|  Cancelar
+				button#btokEvent.btn.btn-primary(type='button')
+					i.fa.fa-floppy-o
+					|  Grabar
+
+script(type='text/javascript', src='/js/home/events.js')

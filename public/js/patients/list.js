@@ -1,4 +1,16 @@
 $(function () {
+
+	$('#sppatientslist').setTooltip('Filtro de informacion');
+
+	$('#sppatientslist').click(function(event) {
+		var $this = $(this), 
+		$panel = $this.parents('.panel');
+
+		$panel.find('#search').slideToggle();
+		if($this.css('display') != 'none') {
+			$panel.find('.panel-body input').focus();
+		}
+	});
 	$('.selectpicker').selectpicker();
 	$.ajax({
 		url: '/api/patients/list',

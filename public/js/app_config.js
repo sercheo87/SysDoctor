@@ -259,6 +259,16 @@ var i18n = new I18n({
 /* Configuraciones Globales */
 /* *************************************************************************************** */
 $(function () {
+	/* input con fechas */
+	$('.datepicker').datetimepicker({
+		pickDate: false
+	});
+
+
+	$('.datetimepicker').datetimepicker({
+		language: 'es-ES',
+		showToday: true
+	});
 
 	/* Selects */
 	$('.selectpicker').selectpicker('render');

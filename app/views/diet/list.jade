@@ -1,6 +1,14 @@
 .panel.panel-default
-	.panel-heading
-		h4.panel-title Registro de Dietas
+	.panel-heading.clearfix
+		h4.panel-title.pull-left Registro de Dietas
+		.btn-group.btn-group-sm.pull-right
+			span#itemdieteraser.btn.btn-default
+				i.fa.fa-eraser
+			span#itemdietgroup.btn.btn-default
+				i.fa.fa-coffee
+			span#itemdietadd.btn.btn-primary(data-toggle='modal',data-target='#mdldiet')
+				i.fa.fa-plus-square
+
 	.panel-body
 	table#tbldiet.table.table-responsive.table-hover.table-striped
 		thead
@@ -15,5 +23,63 @@
 				th DOMINGO
 				th
 		tbody
+	.panel-footer
+
+
+#mdldiet.modal.fade(tab-index='-1',role='dialog',aria-labelledby='myModalLabel',aria-hidden='true')
+	.modal-dialog
+		.modal-content
+			.modal-header
+				button.close(type='button',data-dismiss='modal',aria-hidden='true') &times;
+				h4.modal-title Dietas
+			.modal-body
+				form#frmdiet.form-horizontal(role='form')
+					.form-group.col-md-6.col-sm-12.pull-left
+						label.col-md-2.control-label Inicio
+						.col-md-10
+							#txtimestart.input-group.datepicker
+								input.form-control(type='text',disabled='disabled')
+								span.input-group-addon
+									span.glyphicon.glyphicon-time
+					.form-group.col-md-6.col-sm-12.pull-right
+						label.col-md-2.control-label Fin
+						.col-md-10
+							#txtimeend.input-group.datepicker
+								input.form-control(type='text',disabled='disabled')
+								span.input-group-addon
+									span.glyphicon.glyphicon-time
+					.form-group
+						label.col-md-2.control-label Lunes
+						.col-md-10
+							input#txdaymon.form-control(type='text',placeholder='Dieta del Lunes')
+					.form-group
+						label.col-md-2.control-label Martes
+						.col-md-10
+							input#txdaytue.form-control(type='text',placeholder='Dieta del Martes')
+					.form-group
+						label.col-md-2.control-label Miercoles
+						.col-md-10
+							input#txdaywed.form-control(type='text',placeholder='Dieta del Miercoles')
+					.form-group
+						label.col-md-2.control-label Jueves
+						.col-md-10
+							input#txdaythu.form-control(type='text',placeholder='Dieta del Jueves')
+					.form-group
+						label.col-md-2.control-label Viernes
+						.col-md-10
+							input#txdayfry.form-control(type='text',placeholder='Dieta del Viernes')
+					.form-group
+						label.col-md-2.control-label Sabado
+						.col-md-10
+							input#txdaysat.form-control(type='text',placeholder='Dieta del Sabado')
+					.form-group
+						label.col-md-2.control-label Domingo
+						.col-md-10
+							input#txdaysun.form-control(type='text',placeholder='Dieta del Domingo')
+
+			.modal-footer
+				.text-center
+					a#btdietcancel.btn.btn-default(type='button') Cancelar
+					a#btdiettadd.btn.btn-primary(type='button') Grabar
 
 script(type='text/javascript', src='/js/diet/list.js')

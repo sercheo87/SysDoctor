@@ -7,17 +7,17 @@ module.exports = function(app, data_init){
 
 	// Administracion
 	var administration = require('../app/controllers/ctrl_administration');
-	app.get('/administration', administration.index);
+	app.get('/administration', csrf, administration.index);
 
 	// Patients
 	var patients = require('../app/controllers/ctrl_patients');
 	app.get('/patients/add', csrf, patients.add);
-	app.get('/patients/list', patients.list);
-	app.get('/patients/detail/:identification', patients.detail);
+	app.get('/patients/list', csrf, patients.list);
+	app.get('/patients/detail/:identification', csrf, patients.detail);
 
 	//Reports
 	var receipts = require('../app/controllers/ctrl_receipts')
-	app.get('/receipt/inquiry/:idPatient',receipts.inquiry)
+	app.get('/receipt/inquiry/:idPatient', csrf,receipts.inquiry)
 
 
 
@@ -47,9 +47,9 @@ module.exports = function(app, data_init){
 	// Patients
 	var api_patient=require('../app/apis/api_patient');
 	app.put('/api/patients/add', csrf, api_patient.addPatient);
-	app.get('/api/patients/list', api_patient.getListPatient);
-	app.get('/api/patients/list/:identification', api_patient.getPatient);
-	app.get('/api/patients/searchLive*', api_patient.getListSearchPatient);
+	app.get('/api/patients/list', csrf, api_patient.getListPatient);
+	app.get('/api/patients/list/:identification', csrf, api_patient.getPatient);
+	app.get('/api/patients/searchLive*', csrf, api_patient.getListSearchPatient);
 
 	// Civil Status
 	var api_civilStatus=require('../app/apis/api_civilStatus');
@@ -69,37 +69,32 @@ module.exports = function(app, data_init){
 
 	// Medical Record
 	var api_medicalRecord=require('../app/apis/api_medicalRecord');
-	app.put('/api/medical/record/:idPatient', api_medicalRecord.addMedicalRecord);
-	app.get('/api/medical/record/:idMedical', api_medicalRecord.getMedicalRecord);
-	app.get('/api/medical/record/list/:idPatient', api_medicalRecord.getListMedicalRecord);
+	app.put('/api/medical/record/:idPatient', csrf, api_medicalRecord.addMedicalRecord);
+	app.get('/api/medical/record/:idMedical', csrf, api_medicalRecord.getMedicalRecord);
+	app.get('/api/medical/record/list/:idPatient', csrf, api_medicalRecord.getListMedicalRecord);
 
 	// Medical Appointments
 	var api_medicalAppointments=require('../app/apis/api_medicalAppointments');
-	app.put('/api/medical/appointments/:idMedical', api_medicalAppointments.addMedicalAppointments);
-	app.get('/api/medical/appointments/:idAppointments', api_medicalAppointments.getMedicalAppointments);
-	app.get('/api/medical/appointments/list/:idMedical', api_medicalAppointments.getListMedicalAppointments);
+	app.put('/api/medical/appointments/:idMedical', csrf, api_medicalAppointments.addMedicalAppointments);
+	app.get('/api/medical/appointments/:idAppointments', csrf, api_medicalAppointments.getMedicalAppointments);
+	app.get('/api/medical/appointments/list/:idMedical', csrf, api_medicalAppointments.getListMedicalAppointments);
 
 	// Recipes
 	var api_recipes=require('../app/apis/api_recipes');
-	app.put('/api/medical/recipes/:idAppointments', api_recipes.addRecipes);
-	app.del('/api/medical/recipes/:idRecipes', api_recipes.delRecipes);
-	app.get('/api/medical/recipes/:idAppointments', api_recipes.getRecipes);
-	app.get('/api/medical/recipes/list/:idAppointments', api_recipes.getLisRecipes);
+	app.put('/api/medical/recipes/:idAppointments', csrf, api_recipes.addRecipes);
+	app.del('/api/medical/recipes/:idRecipes', csrf, api_recipes.delRecipes);
+	app.get('/api/medical/recipes/:idAppointments', csrf, api_recipes.getRecipes);
+	app.get('/api/medical/recipes/list/:idAppointments', csrf, api_recipes.getLisRecipes);
 
 	// Events
 	var api_events=require('../app/apis/api_events');
-	app.put('/api/events/add', api_events.addEvent);
-	app.get('/api/events/list', api_events.getAllEvents);
-	
-	// Diet Group
-	var api_diet_group=require('../app/apis/api_diet_group');
-	app.put('/api/diet/group/add', api_diet_group.addDiet_Group);
-	app.get('/api/diet/group/list/detail', api_diet_group.getAllDiet_Group);
-	
+	app.put('/api/events/add', csrf, api_events.addEvent);
+	app.get('/api/events/list', csrf, api_events.getAllEvents);
+
 	// Diet Detail
 	var api_diet_detail=require('../app/apis/api_diet_detail');
-	app.put('/api/diet/detail/add', api_diet_detail.addDiet_Detail);
-	app.get('/api/diet/detail/list/:idMedical', api_diet_detail.getAllDiet_GroupList);
+	app.put('/api/diet/detail/add/:idMedical', csrf, api_diet_detail.addDiet_Detail);
+	app.get('/api/diet/detail/list/:idMedical', csrf, api_diet_detail.getAllDiet_GroupList);
 
 	app.all('*', function(req, res){
 		res.send(404);
