@@ -5,6 +5,7 @@ var MdlMedicine = db.define('tbmedicine', {
 	medicinegroup_id: 	{ type: 'number' },
 	description: 				{ type: 'text', required: 'true' }
 },{
+	id:'id',
 	autoFetch : true,
 	cache : false
 });

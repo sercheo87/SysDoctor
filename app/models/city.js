@@ -1,12 +1,11 @@
 var db = require('orm').db;
 
-var MdlCity = db.define("tbcity", {
+var MdlCity = db.define('tbcity', {
 	id: 					{ type: 'number', primary: true, serial: true },
 	country_id: 	{ type: 'number' },
 	description: 	{ type: 'text', required: 'true' }
 },{
-	autoFetch : true,
-	cache : false
+	id:'id'
 });
 
 

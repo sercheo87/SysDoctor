@@ -6,11 +6,11 @@ var Sync = require('sql-ddl-sync').Sync;
 module.exports = function(orm){
 
 	db.settings.set("properties.association_key", "{field}");
-
+/*
 	db.models.tbcity.hasOne('country', db.models.tbcountry,{required: true});
 	db.models.tbmedicine.hasOne('groupmedicine', db.models.tbgroupmedicine,{required: true});
 	db.models.tbevents.hasOne('patient', db.models.tbpatient);
-	
+	*/
 	db.models.tbcity.sync();
 	db.models.tbpatient.sync();
 	db.models.tbmedicine.sync();
@@ -73,17 +73,17 @@ sync.defineCollection('tbcountry', {
 });
 
 sync.defineCollection('tbcity', {
-	id: 					{ type: 'number', primary: true, serial: true },
+	id: 					{ type: 'number', primary: true, serial: true, unique: true },
 	country_id: 	{ type: 'number' },
 	description: 	{ type: 'text', required: true }
 });
-
+/*
 sync.defineCollection('tbmedicine', {
 	id: 								{ type: 'number', primary: true, serial: true },
 	groupmedicine_id: 	{ type: 'number' },
 	description: 				{ type: 'text', required: true }
 });
-
+*/
 sync.defineCollection('tbgroupmedicine', {
 	id: 					{ type: 'number', primary: true, serial: true },
 	description: 	{ type: 'text', required: true }
@@ -153,7 +153,7 @@ sync.defineCollection('tbdiet_detail', {
 
 				/* Valores Default */
 			// Usuario Adminisrador Manager
-			db.models.tbusers.count({ login: 'admin' }, function (err, count) {
+/*			db.models.tbusers.count({ login: 'admin' }, function (err, count) {
 				if(count==0){
 					console.log('Creating Record User Manager');
 					db.models.tbusers.create([{
@@ -248,8 +248,8 @@ sync.defineCollection('tbdiet_detail', {
 						});
 				}
 			});
-
-		}
+*/
+}
 	//});
 });
 };
