@@ -20,7 +20,8 @@
     "grunt-autoprefixer": "~0.7.2",
     "karma": "~0.12.1",
     "grunt-karma": "~0.8.2",
-    "sql-ddl-sync": "^0.1.4"
+    "sql-ddl-sync": "^0.1.4",
+    "client-sessions": "~0.6.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

@@ -1,6 +1,8 @@
+var express = require('express');
+
 module.exports = function(app, data_init){
 
-/* ========================== ROUTE ====================== */
+	/* ========================== ROUTE ====================== */
 	//home route
 	var home = require('../app/controllers/ctrl_home');
 	app.get('/',home.index);
@@ -21,7 +23,7 @@ module.exports = function(app, data_init){
 
 
 
-/* =========================== API ======================== */
+	/* =========================== API ======================== */
 	// Menu
 	app.post('/api/menu', function(req, res) {
 		if(req.session.authenticate=='true')
@@ -43,6 +45,10 @@ module.exports = function(app, data_init){
 	app.get('/api/users', csrf, api_user.GetAllUsers);
 	app.get('/api/users/:login', api_user.GetUser);
 	app.post('/api/users/:login', api_user.GetUser);
+	app.get('/logout', function(req, res){
+		req.session.destroy();
+		res.redirect('/');
+	});
 
 	// Patients
 	var api_patient=require('../app/apis/api_patient');
@@ -105,6 +111,7 @@ module.exports = function(app, data_init){
 	app.locals.message = {};
 
 	function csrf(req, res, next) {
+		console.log('XXXXXXXXXXXXXXXXXXXXXXXXXx'+express.session.authenticate);
 		res.locals.token = req.session._csrf;
 		if(req.session.authenticate=='true')
 			next();

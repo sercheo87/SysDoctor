@@ -1,31 +1,13 @@
 nav.navbar.navbar-default(role='navigation')
-    .container-fluid
-        //
-           Brand and toggle get grouped for better mobile display 
-        .navbar-header
-          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          a.navbar-brand(href='/') Consultorio Medico
-        //
-           Collect the nav links, forms, and other content for toggling 
-        #bs-example-navbar-collapse-1.collapse.navbar-collapse
-          ul.nav.navbar-nav
-            li.dropdown
-              a.dropdown-toggle(href='#', data-toggle='dropdown')
-                | Pacientes
-                b.caret
-              ul.dropdown-menu
-                li
-                  a(href='#') Listado
-                li
-                  a(href='#') Registro
-                li.divider
-          form.navbar-form.navbar-left(role='search')
-            .form-group
-              input#txBarSearchPatient.form-control(type='text', placeholder='Busqueda de Pacientes')
-            
-          .navbar-form.navbar-right(role='form')
-            button.btn.btn-success(type='submit') Cerrar Session
+		.container-fluid
+
+				.navbar-header
+					button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+						span.sr-only Toggle navigation
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
+					a.navbar-brand(href='/') Consultorio Medico
+
+				#bs-example-navbar-collapse-1.collapse.navbar-collapse
+					block navigationitems
