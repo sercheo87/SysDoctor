@@ -13,7 +13,7 @@ block content
 			li.active
 				a(href='#pnlInformation', data-toggle='tab') Informacion Personal
 			li
-				a(href='#ctnTblCtrlMedic', data-toggle='tab') Informacion General
+				a#tabinfogeneral(href='#ctnTblCtrlMedic', data-toggle='tab') Informacion General
 			li
 				a(href='#ctnDiet', data-toggle='tab') Dietas
 		//Tab panes 
@@ -101,12 +101,16 @@ block content
 						.col-md-3
 							.form-group
 								label.control-label(for='tx_mcd_weidth') Peso
-								input#tx_mcd_weidth.form-control.integer(name='tx_mcd_weidth',type='number', placeholder='Peso')
+								.input-group
+									span.input-group-addon Kg
+									input#tx_mcd_weidth.form-control.integer(name='tx_mcd_weidth',type='text', placeholder='Peso')
 
 						.col-md-3
 							.form-group
 								label.control-label(for='tx_mcd_size') Altura
-								input#tx_mcd_size.form-control.integer(name='tx_mcd_size',type='number', placeholder='Altura')
+								.input-group
+									span.input-group-addon Cm
+									input#tx_mcd_size.form-control.integer(name='tx_mcd_size',type='text', placeholder='Altura')
 
 						.col-md-3
 							.form-group
@@ -121,12 +125,12 @@ block content
 						.col-md-12
 							.form-group
 								label.control-label(for='tx_mcd_reason') Motivo
-								textarea#tx_mcd_reason.form-control.alphanumeric(name='tx_mcd_reason',type='text', placeholder='Motivo')
+								textarea#tx_mcd_reason.form-control.spaced-alphanumeric(name='tx_mcd_reason',type='text', placeholder='Motivo')
 
 						.col-md-12
 							.form-group
 								label.control-label(for='tx_mcd_observation') Observaciones
-								textarea#tx_mcd_observation.form-control(name='tx_mcd_observation',type='text', placeholder='Observaciones')
+								textarea#tx_mcd_observation.form-control.spaced-alphanumeric(name='tx_mcd_observation',type='text', placeholder='Observaciones')
 
 					a#btcancelMedAppointment.btn.btn-default(type='button')
 						i.fa.fa-arrow-circle-o-left

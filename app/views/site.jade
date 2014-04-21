@@ -2,6 +2,8 @@ extends layout
 
 block jsmaster
 	script(type='text/javascript', src='/js/tmpl/menu.js')
+	script(type='text/javascript', src='/js/reports/landscape_receipt.js')
+	script(type='text/javascript', src='/components/jspdf/jspdf.plugin.split_text_to_size.js')
 
 block navigationitems
 	ul.nav.navbar-nav
@@ -19,7 +21,7 @@ block navigationitems
 		.form-group
 			input#txBarSearchPatient.form-control(type='text', placeholder='Busqueda de Pacientes')
 	.navbar-form.navbar-right(role='form')
-		a.btn.btn-success(href='/logout') Cerrar Session
+		a#btnsessionlogout.btn.btn-success Cerrar Session
 
 block content_master
 	.row.row-offcanvas.row-offcanvas-right
@@ -29,9 +31,35 @@ block content_master
 			block content
 		#sidebar.col-xs-6.col-sm-3.col-md-3.sidebar-offcanvas(role='navigation')
 			.list-group
-				a#addEvent.list-group-item.active(href='#') Agregar Cita
+				a#addEvent.list-group-item.active(href='#') 
+					i.fa.fa-calendar
+					|  Agregar Cita
 			block options
 				#pnl_menu.panel-group
+				.panel.panel-default
+					.panel-heading
+						h4.panel-title
+							a(data-toggle='collapse',data-parent='#pnl_menu')
+								i.fa.fa-users
+								|  Usuarios
+					.panel-body
+						form#send-message
+							.row
+								.col-md-12
+									.form-group
+										select#slusersconnect.form-control
+								.col-md-12
+									.form-group
+										#messages.well
+											#nicknames
+											#lines
+								.col-md-12
+										.input-group
+											input#message(type='text',class='form-control')
+											span.input-group-btn
+												a.btn.btn-default(type='button')
+													i.fa.fa-envelope
+
 
 	include home/events
 

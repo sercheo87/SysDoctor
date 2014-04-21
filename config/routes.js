@@ -111,7 +111,6 @@ module.exports = function(app, data_init){
 	app.locals.message = {};
 
 	function csrf(req, res, next) {
-		console.log('XXXXXXXXXXXXXXXXXXXXXXXXXx'+express.session.authenticate);
 		res.locals.token = req.session._csrf;
 		if(req.session.authenticate=='true')
 			next();

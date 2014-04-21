@@ -153,9 +153,10 @@ sync.defineCollection('tbdiet_detail', {
 
 				/* Valores Default */
 			// Usuario Adminisrador Manager
-/*			db.models.tbusers.count({ login: 'admin' }, function (err, count) {
+			db.models.tbusers.count({ login: 'admin' }, function (err, count) {
 				if(count==0){
 					console.log('Creating Record User Manager');
+					
 					db.models.tbusers.create([{
 						name:'Administrator',
 						lastname:'Manager',
@@ -169,6 +170,21 @@ sync.defineCollection('tbdiet_detail', {
 							res.send(500, {error: 'Error en establecimiento de Data por Default'});
 						}
 					});
+
+					db.models.tbusers.create([{
+						name:'Invitado',
+						lastname:'Guest',
+						datebirth :'2014/01/01',
+						state:true,
+						login:'guest',
+						pass:'1234'
+					}],function(err,data){
+						if(err){
+							console.log(err);
+							res.send(500, {error: 'Error en establecimiento de Data por Default'});
+						}
+					});
+
 				}
 			});
 
@@ -248,8 +264,8 @@ sync.defineCollection('tbdiet_detail', {
 						});
 				}
 			});
-*/
-}
+
+		}
 	//});
 });
 };

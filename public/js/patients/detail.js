@@ -1,3 +1,6 @@
+var DATA_PATIENT={};
+var DATA_PATIENT_RECIPES={};
+
 $(function () {
 	var dietIdRegister=0;
 	$('.datetimepicker').data('DateTimePicker').setDate(new Date());
@@ -51,141 +54,146 @@ $(function () {
 		}
 	});
 
-	/* Enviar registro */
-	$('#btokGeneralMedGen').click(function(event) {
-		var validForm = $('#frMedical').valid();
-		if(validForm){
-			$.ajax({
-				url: '/api/medical/record/'+$('#tx_patient').val(),
-				type: 'PUT',
-				dataType: 'json',
-				data: {
-					'habit': 				$('#tx_med_habit').val(),
-					'antecedent': 	$('#tx_med_antecedent').val(),
-					'alergy': 			$('#tx_med_alergy').val(),
-					'bloodType': 		$('#tx_med_bloodtype').val(),
-					'observation': 	$('#tx_med_observation').val()
-				},
-				success: function(data) {
-					if(data.success){
-						AlertShow('info',data.msg);
-						GetMedicalInformation();
-					}else{
-						AlertShow('warning',data.msg);
-					}
+/* Enviar registro */
+$('#btokGeneralMedGen').click(function(event) {
+	var validForm = $('#frMedical').valid();
+	if(validForm){
+		$.ajax({
+			url: '/api/medical/record/'+$('#tx_patient').val(),
+			type: 'PUT',
+			dataType: 'json',
+			data: {
+				'habit': 				$('#tx_med_habit').val(),
+				'antecedent': 	$('#tx_med_antecedent').val(),
+				'alergy': 			$('#tx_med_alergy').val(),
+				'bloodType': 		$('#tx_med_bloodtype').val(),
+				'observation': 	$('#tx_med_observation').val()
+			},
+			success: function(data) {
+				if(data.success){
+					AlertShow('info',data.msg);
+					GetMedicalInformation();
+				}else{
+					AlertShow('warning',data.msg);
 				}
-			});
+			}
+		});
+	}
+});
+
+$('#btcancelGeneralMedGen').click(function(event) {
+	GetMedicalInformation();
+});
+/* ---------------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------------- */
+/* Eventos Modales Registro consulta medica                            */
+/* ---------------------------------------------------------------------- */
+
+$('#frMedConDetail').validate({
+	ignore: [],
+	rules: {
+		tx_mcd_weidth: 				{ maxlength: 3, required: true },
+		tx_mcd_size: 					{ maxlength: 3, required: true },
+		tx_mcd_pulse: 				{ maxlength: 10, required: true },
+		tx_mcd_pressure: 			{ maxlength: 10, required: true },
+		tx_mcd_reason: 				{ maxlength: 500, required: true },
+		tx_mcd_observation: 	{ maxlength: 500, required: true }
+	},
+	messages: {
+		tx_mcd_weidth: 				{ maxlength:'Longitud Maxima de 3 caracteres', required:'Peso del paciente' },
+		tx_mcd_size: 					{ maxlength:'Longitud Maxima de 3 caracteres', required:'Altura del paciente' },
+		tx_mcd_pulse: 				{ maxlength:'Longitud Maxima de 10 caracteres', required:'Pulso del paciente' },
+		tx_mcd_pressure: 			{ maxlength:'Longitud Maxima de 10 caracteres', required:'Presion del paciente' },
+		tx_mcd_reason: 				{ maxlength:'Longitud Maxima de 500 caracteres', required:'Razon de la consulta' },
+		tx_mcd_observation: 	{ maxlength:'Longitud Maxima de 500 caracteres', required:'Observaciones del doctor' }
+	},
+	showErrors: function (errorMap, errorList) {
+		$.each(this.successList, function (index, value) {
+			var element=$(value);
+			$('#'+value.id+'').tooltip('destroy');
+			$(element).closest('.form-group').removeClass('has-error').addClass('has-success').addClass('has-feedback');
+			$(element).parent().find('span').remove();
+			if($(element).get(0).tagName!='SELECT')
+			{
+				var validIcon='<span class="glyphicon glyphicon-ok form-control-feedback"></span>';
+				$(element).parent().append(validIcon);
+			}
+		});
+
+		$.each(errorList, function (index, value) {
+			var element=$(value.element);
+			$('#'+value.element.id+'').attr('title',value.message).tooltip({
+				placement: 'bottom',
+				trigger: 'manual',
+				delay: { show: 500, hide: 5000 }
+			}).tooltip('show');
+			$(element).closest('.form-group').removeClass('has-success').addClass('has-error').addClass('has-feedback');
+			$(element).parent().find('span').remove();
+			if($(element).get(0).tagName!='SELECT')
+			{
+				var validIcon='<span class="glyphicon glyphicon-remove form-control-feedback"></span>';
+				$(element).parent().append(validIcon);
+			}
+		});
+	}
+});
+
+/* Enviar registro */
+$('#btokMedAppointment').click(function(event) {
+	var validForm = $('#frMedConDetail').valid();
+	if(validForm){
+		if($('#tx_medical').val()==''){
+			AlertShow('warning','Error Obteniendo identificador del paciente');
+			return;
 		}
-	});
-
-	$('#btcancelGeneralMedGen').click(function(event) {
-		GetMedicalInformation();
-	});
-	/* ---------------------------------------------------------------------- */
-
-	/* ---------------------------------------------------------------------- */
-	/* Eventos Modales Registro consulta medica                            */
-	/* ---------------------------------------------------------------------- */
-
-	$('#frMedConDetail').validate({
-		ignore: [],
-		rules: {
-			tx_mcd_weidth: 				{ maxlength: 3, required: true },
-			tx_mcd_size: 					{ maxlength: 3, required: true },
-			tx_mcd_pulse: 				{ maxlength: 10, required: true },
-			tx_mcd_pressure: 			{ maxlength: 10, required: true },
-			tx_mcd_reason: 				{ maxlength: 500, required: true },
-			tx_mcd_observation: 	{ maxlength: 500, required: true }
-		},
-		messages: {
-			tx_mcd_weidth: 				{ maxlength:'Longitud Maxima de 3 caracteres', required:'Peso del paciente' },
-			tx_mcd_size: 					{ maxlength:'Longitud Maxima de 3 caracteres', required:'Altura del paciente' },
-			tx_mcd_pulse: 				{ maxlength:'Longitud Maxima de 10 caracteres', required:'Pulso del paciente' },
-			tx_mcd_pressure: 			{ maxlength:'Longitud Maxima de 10 caracteres', required:'Presion del paciente' },
-			tx_mcd_reason: 				{ maxlength:'Longitud Maxima de 500 caracteres', required:'Razon de la consulta' },
-			tx_mcd_observation: 	{ maxlength:'Longitud Maxima de 500 caracteres', required:'Observaciones del doctor' }
-		},
-		showErrors: function (errorMap, errorList) {
-			$.each(this.successList, function (index, value) {
-				var element=$(value);
-				$('#'+value.id+'').tooltip('destroy');
-				$(element).closest('.form-group').removeClass('has-error').addClass('has-success').addClass('has-feedback');
-				$(element).parent().find('span').remove();
-				if($(element).get(0).tagName!='SELECT')
-				{
-					var validIcon='<span class="glyphicon glyphicon-ok form-control-feedback"></span>';
-					$(element).parent().append(validIcon);
+		$.ajax({
+			url: '/api/medical/appointments/'+$('#tx_medical').val(),
+			type: 'PUT',
+			dataType: 'json',
+			data: {
+				'rweight': 					$('#tx_mcd_weidth').val(),
+				'rsize': 						$('#tx_mcd_size').val(),
+				'pulse': 						$('#tx_mcd_pulse').val(),
+				'blood_pressure': 	$('#tx_mcd_pressure').val(),
+				'reason': 					$('#tx_mcd_reason').val(),
+				'observation': 			$('#tx_mcd_observation').val()
+			},
+			success: function(data) {
+				if(data.success){
+					AlertShow('info',data.msg);
+				}else{
+					AlertShow('warning',data.msg);
 				}
-			});
+			}
+		});
+	}
+	GetMedicalAppointments($('#tx_medical').val());
+});
 
-			$.each(errorList, function (index, value) {
-				var element=$(value.element);
-				$('#'+value.element.id+'').attr('title',value.message).tooltip({
-					placement: 'bottom',
-					trigger: 'manual',
-					delay: { show: 500, hide: 5000 }
-				}).tooltip('show');
-				$(element).closest('.form-group').removeClass('has-success').addClass('has-error').addClass('has-feedback');
-				$(element).parent().find('span').remove();
-				if($(element).get(0).tagName!='SELECT')
-				{
-					var validIcon='<span class="glyphicon glyphicon-remove form-control-feedback"></span>';
-					$(element).parent().append(validIcon);
-				}
-			});
-		}
-	});
+$('#btcancelMedAppointment').click(function(event) {
+	EnableButttonDetMedical(false);
+});
+/* ---------------------------------------------------------------------- */
+/* Obtener informacion del Paciente */
+$.ajax({
+	url: '/api/patients/list/'+dataPatient,
+	type: 'GET',
+	dataType: 'json',
+	data: {},
+	success: function(data) {
+		if(data.success){
+			DATA_PATIENT=data.data[0];
 
-	/* Enviar registro */
-	$('#btokMedAppointment').click(function(event) {
-		var validForm = $('#frMedConDetail').valid();
-		if(validForm){
-			$.ajax({
-				url: '/api/medical/appointments/'+$('#tx_medical').val(),
-				type: 'PUT',
-				dataType: 'json',
-				data: {
-					'rweight': 					$('#tx_mcd_weidth').val(),
-					'rsize': 						$('#tx_mcd_size').val(),
-					'pulse': 						$('#tx_mcd_pulse').val(),
-					'blood_pressure': 	$('#tx_mcd_pressure').val(),
-					'reason': 					$('#tx_mcd_reason').val(),
-					'observation': 			$('#tx_mcd_observation').val()
-				},
-				success: function(data) {
-					if(data.success){
-						AlertShow('info',data.msg);
-					}else{
-						AlertShow('warning',data.msg);
-					}
-				}
-			});
-			EnableButttonMedical(false);
-		}
-		GetMedicalAppointments($('#tx_medical').val());
-	});
+			$('#pName').text(data.data[0].name);
+			$('#pJob').text(data.data[0].ocupation);
+			$('#pYearsOld').text(calcularEdad(data.data[0].birthday.substring(0,10)));
+			$('#pSex').text(data.data[0].sex);
+			$('#tx_patient').val(data.data[0].id_patient);
+			id_patient=data.data[0].id_patient;
 
-	$('#btcancelMedAppointment').click(function(event) {
-		EnableButttonDetMedical(false);
-	});
-	/* ---------------------------------------------------------------------- */
-	/* Obtener informacion del Paciente */
-	$.ajax({
-		url: '/api/patients/list/'+dataPatient,
-		type: 'GET',
-		dataType: 'json',
-		data: {},
-		success: function(data) {
-			if(data.success){
-				$('#pName').text(data.data[0].name);
-				$('#pJob').text(data.data[0].ocupation);
-				$('#pYearsOld').text(calcularEdad(data.data[0].birthday.substring(0,10)));
-				$('#pSex').text(data.data[0].sex);
-				$('#tx_patient').val(data.data[0].id_patient);
-				id_patient=data.data[0].id_patient;
-
-				dietIdRegister=data.data[0].id_patient;
-				GetMedicalInformation()
+			dietIdRegister=data.data[0].id_patient;
+			GetMedicalInformation()
 				//Cargar Dietas
 				listDietDetail(dietIdRegister);
 
@@ -199,40 +207,40 @@ $(function () {
 		}
 	});
 
-	loadLabels();
-	EnableButttonDetMedical(false);
+loadLabels();
+EnableButttonDetMedical(false);
 
-	$('#itemFilter').setTooltip('Filtro de informacion');
-	$('#itemAddControl').setTooltip('Agregar Control Medico');
-	$('#itemPrint').setTooltip('Imprimir Receta');
+$('#itemFilter').setTooltip('Filtro de informacion');
+$('#itemAddControl').setTooltip('Agregar Control Medico');
+$('#itemPrint').setTooltip('Imprimir Receta');
 
-	$('#itemFilter').click(function(event) {
-		var $this = $(this), 
-		$panel = $this.parents('.panel');
+$('#itemFilter').click(function(event) {
+	var $this = $(this), 
+	$panel = $this.parents('.panel');
 
-		$panel.find('#search').slideToggle();
-		if($this.css('display') != 'none') {
-			$panel.find('.panel-body input').focus();
-		}
-	});
+	$panel.find('#search').slideToggle();
+	if($this.css('display') != 'none') {
+		$panel.find('.panel-body input').focus();
+	}
+});
 
-	$('#lnkitem1').editable({
-		type: 'text',
-		title: 'Enter username',
-		success: function(response, newValue) {
+$('#lnkitem1').editable({
+	type: 'text',
+	title: 'Enter username',
+	success: function(response, newValue) {
 						userModel.set('username', newValue); //update backbone model
 					}
 				});
 
-	$('#itemAddControl').click(function(event) {
-		EnableButttonDetMedical(true);
-	});
+$('#itemAddControl').click(function(event) {
+	EnableButttonDetMedical(true);
+});
 
-	$('#itemPrint').click(function (event) {
-		console.log('imprimir');
-		event.preventDefault();
-		window.open('/receipt/inquiry/5', "popupWindow", "width=600,height=600,scrollbars=yes");
-	});
+$('#itemPrint').click(function (event) {
+	//event.preventDefault();
+	//window.open('/receipt/inquiry/5', "popupWindow", "width=600,height=600,scrollbars=yes");
+	reportReceipt(DATA_PATIENT,DATA_PATIENT_RECIPES);
+});
 
 });//jquery
 
@@ -408,8 +416,10 @@ function GetRecipes(){
 		data: {},
 		success: function(data) {
 			if(data.success){
+				DATA_PATIENT_RECIPES=data.data;
+				console.log(DATA_PATIENT_RECIPES);
 				$.each(data.data, function (index, value) {
-					row +=$.format(rowLabel,value.medicine,value.dose,value.observation,value.id_recipes);
+					row +=$.validator.format(rowLabel,value.medicine,value.dose,value.observation,value.id_recipes);
 				});
 				row+=rowEdit;
 				$('#tbl_recipe > tbody').html(row);
@@ -424,8 +434,10 @@ function GetRecipes(){
 
 function GetMedicalInformation(){
 	/* Obtener informacion medica */
+	var idmedicalrecord=$('#tx_patient').val();
+	$('#tabinfogeneral').tooltip('destroy');
 	$.ajax({
-		url: '/api/medical/record/list/'+$('#tx_patient').val(),
+		url: '/api/medical/record/list/'+idmedicalrecord,
 		type: 'GET',
 		dataType: 'json',
 		data: {},
@@ -447,6 +459,12 @@ function GetMedicalInformation(){
 					$('#tx_medical').val(data.data[0].id_medical);
 
 					GetMedicalAppointments(data.data[0].id_medical);
+				}
+				else{
+					AlertShow('info','El paciente no tiene registrada la informacion base.');
+					$('#tabinfogeneral').setTooltip('Favor registrar esta informacion primero.');
+					$('#tabinfogeneral').tooltip('show');
+					$('#tabinfogeneral').tab('show');
 				}
 			}else{
 				AlertShow('warning',data.msg);

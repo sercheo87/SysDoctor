@@ -1,4 +1,7 @@
 $(function() {
+
+	storage.removeAll();
+	
 	$('#frsignin').validate({
 		rules: {
 			login_user:{
@@ -37,11 +40,15 @@ $(function() {
 		var password = $("#login_pass").val();
 		var validForm = $("#frsignin").valid();
 
+		storage.set('userName', username);
+
 		if(validForm){
 			$.get('/api/users/'+username,{
 				username: username, 
 				password:password
 			},function () {
+				//registro del usuario
+				//socket.emit('add user', storage.get('userName'));
 				window.location = "/administration";
 			})
 			.fail(function(res){

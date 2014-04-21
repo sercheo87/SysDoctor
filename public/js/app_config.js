@@ -1,4 +1,4 @@
-
+var storage=$.sessionStorage;
 /* Mensajes de tipo Modal */
 /* *************************************************************************************** */
 $.growl.default_options = {
@@ -108,13 +108,13 @@ jQuery.fn.formatTable = function (options) {
 
 	if(options.id!='') propId=' id="'+options.id+'"'
 		if(options.cssClass!='') propClass=' class="'+options.cssClass+'"';
-	if(options.tools.showTools==true) row += $.format('<th>{1}</th>', '','');
+	if(options.tools.showTools==true) row += $.validator.format('<th>{1}</th>', '','');
 
 	//creacion de cabeceras
 	$.each(options.columns, function (i, columnName) {
-		row += $.format('<th {0}>{1}</th>', ((columnName.cssClass==undefined)?'':columnName.cssClass),columnName.text);
+		row += $.validator.format('<th {0}>{1}</th>', ((columnName.cssClass==undefined)?'':columnName.cssClass),columnName.text);
 	});
-	thead = $.format('<thead><tr>{0}</tr></thead>',row);
+	thead = $.validator.format('<thead><tr>{0}</tr></thead>',row);
 
 	//creacion de data del cuerpo
 	$.each(options.data, function (jsonKey, jsonValue) {
@@ -125,7 +125,7 @@ jQuery.fn.formatTable = function (options) {
 			if(columnName.tmpl==undefined){
 				tdValue=jsonValue[columnName.id];
 			}else{
-				tdValue=$.format(columnName.tmpl,jsonValue[columnName.id]);
+				tdValue=$.validator.format(columnName.tmpl,jsonValue[columnName.id]);
 			}
 
 			if(columnName.isDate==true){
@@ -140,33 +140,33 @@ jQuery.fn.formatTable = function (options) {
 					idToolTemp=jsonValue[columnName.id];
 				}
 			}
-			row += $.format('<td>{0}</td>',tdValue);
+			row += $.validator.format('<td>{0}</td>',tdValue);
 		});
 		//creacion de las columnas de herramientas
 		if(options.tools.showTools==true)
 		{
-			row = $.format('<td>{0}</td>',$.format(options.tools.tmpl,idToolTemp)) + row;
+			row = $.validator.format('<td>{0}</td>',$.validator.format(options.tools.tmpl,idToolTemp)) + row;
 		}
-		rows += $.format('<tr>{0}</tr>',row);
+		rows += $.validator.format('<tr>{0}</tr>',row);
 	});
 
-	tbody += $.format('<tbody>{0}</tbody>',rows);
+	tbody += $.validator.format('<tbody>{0}</tbody>',rows);
 
 	if(options.footer.show){
 		var pagerSize='<div id="footer" class="pull-right">';
 		pagerSize+='<div class="btn-group btn-group-sm">';
-		pagerSize+=$.format('<button type="button" class="btn btn-default" onclick="ChangePageSize(\'{0}\',{1})">{1}</button>',options.id,5);
-		pagerSize+=$.format('<button type="button" class="btn btn-default" onclick="ChangePageSize(\'{0}\',{1})">{1}</button>',options.id,10);
+		pagerSize+=$.validator.format('<button type="button" class="btn btn-default" onclick="ChangePageSize(\'{0}\',{1})">{1}</button>',options.id,5);
+		pagerSize+=$.validator.format('<button type="button" class="btn btn-default" onclick="ChangePageSize(\'{0}\',{1})">{1}</button>',options.id,10);
 		pagerSize+='<div class="btn-group btn-group-sm">';
 		pagerSize+='<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Registros<span class="caret"></span></button>';
 		pagerSize+='<ul class="dropdown-menu">';
-		pagerSize+=$.format('<li><a href="#" onclick="ChangePageSize(\'{0}\',{1})">{1}</a></li>',options.id,25);
-		pagerSize+=$.format('<li><a href="#" onclick="ChangePageSize(\'{0}\',{1})">{1}</a></li>',options.id,50);
+		pagerSize+=$.validator.format('<li><a href="#" onclick="ChangePageSize(\'{0}\',{1})">{1}</a></li>',options.id,25);
+		pagerSize+=$.validator.format('<li><a href="#" onclick="ChangePageSize(\'{0}\',{1})">{1}</a></li>',options.id,50);
 		pagerSize+='</ul>';
 		pagerSize+='</div>';
 		pagerSize+='</div>';
 		pagerSize+='</div>';
-		tfoot=$.format('<tfoot><tr><td colspan="{0}">{1}<div class="pagination"></div></td></tr></tfoot>',options.columns.length+1,pagerSize);
+		tfoot=$.validator.format('<tfoot><tr><td colspan="{0}">{1}<div class="pagination"></div></td></tr></tfoot>',options.columns.length+1,pagerSize);
 	}
 
 	var objSearch='';
@@ -198,7 +198,7 @@ jQuery.fn.formatTable = function (options) {
 		objSearch+='</div>';
 	}
 
-	tbl=$.format('{0}<table{1}>{2}{3}{4}</table>',objSearch,propId+propClass,thead,tbody,tfoot);
+	tbl=$.validator.format('{0}<table{1}>{2}{3}{4}</table>',objSearch,propId+propClass,thead,tbody,tfoot);
 	this.find('div#search').remove();
 	this.find('div#footer').remove();
 	this.find('table').remove();
@@ -256,6 +256,47 @@ var i18n = new I18n({
 //i18n.setLocale("en");
 /* *************************************************************************************** */
 
+
+/* Operaciones de Chat */
+/* *************************************************************************************** */
+var socket = io.connect('http://localhost');
+
+socket.on('connect', function () {
+	$('#chat').addClass('connected');
+});
+
+socket.on('announcement', function (msg) {
+	$('#lines').append($('<p>').append($('<em>').text(msg)));
+});
+
+socket.on('nicknames', function (nicknames) {
+	$('#nicknames').empty().append($('<span>Online: </span>'));
+	$('#slusersconnect').html('');
+	for (var i in nicknames) {
+		$('#nicknames').append($('<b>').text(nicknames[i]));
+		$('#slusersconnect').append('<option>'+nicknames[i]+'</option>')
+	}
+});
+
+socket.on('user message', message);
+socket.on('reconnect', function () {
+	$('#lines').remove();
+	message('System', 'Reconnected to the server');
+});
+
+socket.on('reconnecting', function () {
+	message('System', 'Attempting to re-connect to the server');
+});
+
+socket.on('error', function (e) {
+	message('System', e ? e : 'A unknown error occurred');
+});
+
+function message (from, msg) {
+	$('#lines').append($('<p>').append($('<b>').text(from+':'), msg));
+}
+/* *************************************************************************************** */
+
 /* Configuraciones Globales */
 /* *************************************************************************************** */
 $(function () {
@@ -290,7 +331,7 @@ $(function () {
 			response = JSON.parse(response).data;
 			return {
 				suggestions: $.map(response, function(item) {
-					return { value: $.format('{0} {1} [{2}]',item.last_name,item.name,item.identification), data: item };
+					return { value: $.validator.format('{0} {1} [{2}]',item.last_name,item.name,item.identification), data: item };
 				})
 			};
 		},
@@ -298,8 +339,51 @@ $(function () {
 			window.location= ('/patients/detail/'+suggestion.data.identification);
 		}
 	});
-});
 
-$('[data-toggle=offcanvas]').click(function () {
-	$('.row-offcanvas').toggleClass('active');
+	/* ************************************************************************ */
+	socket.emit('nickname', storage.get('userName'), function (set) {
+		if (!set) {
+			clear();
+			return $('#chat').addClass('nickname-set');
+		}
+	});
+
+	$('#send-message').submit(function () {
+		message('yo', $('#message').val());
+		socket.emit('user message', $('#message').val());
+		clear();
+		$('#lines').get(0).scrollTop = 10000000;
+		return false;
+	});
+
+	function clear () {
+		$('#message').val('').focus();
+	};
+
+	/* ************************************************************************ */
+
+	$('[data-toggle=offcanvas]').click(function () {
+		$('.row-offcanvas').toggleClass('active');
+	});
+
+	/* Cerrar session */
+	$('#btnsessionlogout').click(function(event) {
+		socket.emit('disconnect');
+		window.location = '/logout';
+	});
+
+	$('#btprint').click(function(event) {
+		PrintPage();
+	});
+
+//jquery don ready
 });
+function PrintPage(){
+	var doc = new jsPDF();
+	doc.setFontSize(22);
+	doc.text(20, 20, 'Consultorio Medico');
+	doc.text(20, 30, 'This is client-side Javascript, pumping out a PDF.');
+	doc.addPage();
+	doc.text(20, 20, 'Do you like that?');
+	doc.save('Test.pdf');
+}

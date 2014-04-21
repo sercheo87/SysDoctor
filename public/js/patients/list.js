@@ -22,7 +22,7 @@ $(function () {
 
 				var options={
 					columns:[
-					{id:'identification', text:'Identificacion', tmpl:'<a href="/patients/detail/{0}"><i class="fa fa-user"></i> {0}</a>'},
+					{id:'identification', text:'Identificacion', cssClass:'', tmpl:'<a href="/patients/detail/{0}"><i class="fa fa-user"></i> {0}</a>'},
 					{id:'name', text:'Nombres', cssClass:'data-hide="phone"'},
 					{id:'last_name', text:'Apellidos', cssClass:'data-hide="phone"'},
 					{id:'phone', text:'Telefono', cssClass:'data-hide="phone"'}
