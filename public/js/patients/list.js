@@ -11,7 +11,9 @@ $(function () {
 			$panel.find('.panel-body input').focus();
 		}
 	});
+
 	$('.selectpicker').selectpicker();
+	
 	$.ajax({
 		url: '/api/patients/list',
 		type: 'GET',

@@ -41,7 +41,7 @@ html(lang='en')
 			script(type='text/javascript', src='/components/socket.io-client/dist/socket.io.js')
 			script(type='text/javascript', src='/components/jspdf/dist/jspdf.min.js')
 			script(type='text/javascript', src='/components/jQuery-Storage-API/jquery.storageapi.min.js')
-			script(type='text/javascript', src='/js/bootstrap-growl-master/bootstrap-growl.min.js')
+			script(type='text/javascript', src='/vendor/bootstrap-growl-master/bootstrap-growl.min.js')
 			script(type='text/javascript', src='/js/app_config.js')
 			script(type='text/javascript', src='/js/validation.js')
 
@@ -54,3 +54,5 @@ html(lang='en')
 		include controls/navigation_bar
 		.container
 			block content_master
+
+		include controls/footer

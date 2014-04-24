@@ -4,9 +4,10 @@ block js
 	script(type='text/javascript', src='/js/patients/add.js')
 
 block content
-	.container.theme-showcase(role='main').col-md-12
-		.page-header
-			h1=title
+	.theme-showcase(role='main')
+		
+		h1=title
+
 		form#frmPatient.form-horizontal(role='form',method='post')
 			.form-group
 				legend Informacion General

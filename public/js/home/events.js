@@ -62,4 +62,6 @@ function AddEvent(data){
 			}
 		}
 	});
+	
+	ListEvent();
 };

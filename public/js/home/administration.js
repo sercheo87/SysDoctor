@@ -43,12 +43,32 @@ function ConfigureCalendar(data){
 		view: 'year',
 		tmpl_path: '/js/tmpl/',
 		tmpl_cache: false,
-		day: '2014-03-12',
+		day: moment().format('YYYY-MM-DD'),
+		onAfterEventsLoad: function(events) {
+			if(!events) {
+				return;
+			}
+			var list = $('#eventlist');
+			list.html('');
+
+			$.each(events, function(key, val) {
+				var oSpanIcon='<span class="label label-{0}">{1}</span>';
+				var oClassIcon='';
+
+				if(val.class.indexOf('info')>=0) oClassIcon='primary';
+				if(val.class.indexOf('warning')>=0) oClassIcon='warning';
+				if(val.class.indexOf('important')>=0) oClassIcon='danger';
+				console.log(val);
+				console.log(moment(val.start).format('MMMM Do YYYY, h:mm'));
+				oSpanIcon=$.validator.format(oSpanIcon,oClassIcon,moment(val.start).format('MMMM Do YYYY, h:mm') + ' ' + val.title +'<br>');
+				$(document.createElement('span')).html('<a href="' + val.url + '"> '+ oSpanIcon + ' <i class="fa fa-mobile"></i> '+ val.phone + '</a>').appendTo(list);
+			});
+		},
 		onAfterViewLoad: function(view) {
-			$('.page-header h3').text(this.getTitle());
+			$('.page-header h3').text("Agenda: "+this.getTitle());
 			$('.btn-group button').removeClass('active');
 			$('button[data-calendar-view="' + view + '"]').addClass('active');
-		},
+		}
 	};
 
 	var calendar = $('.calendar').calendar(options);

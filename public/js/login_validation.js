@@ -27,35 +27,28 @@ $(function() {
 				minlength: "Longitud Minima de 3 caracteres"
 			}
 		},
-		highlight: function (element) {
-			$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-		},
-		unhighlight: function (element) {
-			$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-		}
+		showErrors: scanErrorsForms
 	});
 
-	$("#btSignIn").click(function(){
-		var username = $("#login_user").val();
-		var password = $("#login_pass").val();
-		var validForm = $("#frsignin").valid();
+$("#btSignIn").click(function(){
+	var username = $("#login_user").val();
+	var password = $("#login_pass").val();
+	var validForm = $("#frsignin").valid();
 
-		storage.set('userName', username);
+	storage.set('userName', username);
 
-		if(validForm){
-			$.get('/api/users/'+username,{
-				username: username, 
-				password:password
-			},function () {
-				//registro del usuario
-				//socket.emit('add user', storage.get('userName'));
-				window.location = "/administration";
-			})
-			.fail(function(res){
-				var msgError=res.responseJSON.error;
-				bootbox.alert(msgError);
-			});
-		}
-	});
+	if(validForm){
+		$.get('/api/users/'+username,{
+			username: username, 
+			password:password
+		},function () {
+			window.location = "/administration";
+		})
+		.fail(function(res){
+			var msgError=res.responseJSON.error;
+			bootbox.alert(msgError);
+		});
+	}
+});
 
 });

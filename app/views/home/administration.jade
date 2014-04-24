@@ -4,11 +4,11 @@ block js
 	script(type='text/javascript', src='/js/home/administration.js')
 
 block content
-	.container.theme-showcase(role='main').col-md-10
+	.theme-showcase(role='main').col-md-12
 		.page-header
 			h3=title
 
-		.panel.panel-primary
+		.panel.panel-primary.visible-md.visible-lg
 			.panel-heading.clearfix
 			
 				.btn-group.pull-right
@@ -23,9 +23,8 @@ block content
 					button.btn.btn-warning(data-calendar-view='day') Dia
 		.row
 			.col-md-12
-				a#btprint.btn.btn-default imprimir
-			.col-md-12
-				.calendar
+				.calendar.visible-md.visible-lg
+				#eventlist.hidden-md.hidden-lg
 
 		#events-modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
 			.modal-dialog

@@ -23,35 +23,7 @@ $(function () {
 			tx_med_bloodtype: 	{ maxlength:'Longitud Maxima de 500 caracteres' },
 			tx_med_observation: { maxlength:'Longitud Maxima de 500 caracteres' }
 		},
-		showErrors: function (errorMap, errorList) {
-			$.each(this.successList, function (index, value) {
-				var element=$(value);
-				$('#'+value.id+'').tooltip('destroy');
-				$(element).closest('.form-group').removeClass('has-error').addClass('has-success').addClass('has-feedback');
-				$(element).parent().find('span').remove();
-				if($(element).get(0).tagName!='SELECT')
-				{
-					var validIcon='<span class="glyphicon glyphicon-ok form-control-feedback"></span>';
-					$(element).parent().append(validIcon);
-				}
-			});
-
-			$.each(errorList, function (index, value) {
-				var element=$(value.element);
-				$('#'+value.element.id+'').attr('title',value.message).tooltip({
-					placement: 'bottom',
-					trigger: 'manual',
-					delay: { show: 500, hide: 5000 }
-				}).tooltip('show');
-				$(element).closest('.form-group').removeClass('has-success').addClass('has-error').addClass('has-feedback');
-				$(element).parent().find('span').remove();
-				if($(element).get(0).tagName!='SELECT')
-				{
-					var validIcon='<span class="glyphicon glyphicon-remove form-control-feedback"></span>';
-					$(element).parent().append(validIcon);
-				}
-			});
-		}
+		showErrors: scanErrorsForms
 	});
 
 /* Enviar registro */
@@ -108,35 +80,7 @@ $('#frMedConDetail').validate({
 		tx_mcd_reason: 				{ maxlength:'Longitud Maxima de 500 caracteres', required:'Razon de la consulta' },
 		tx_mcd_observation: 	{ maxlength:'Longitud Maxima de 500 caracteres', required:'Observaciones del doctor' }
 	},
-	showErrors: function (errorMap, errorList) {
-		$.each(this.successList, function (index, value) {
-			var element=$(value);
-			$('#'+value.id+'').tooltip('destroy');
-			$(element).closest('.form-group').removeClass('has-error').addClass('has-success').addClass('has-feedback');
-			$(element).parent().find('span').remove();
-			if($(element).get(0).tagName!='SELECT')
-			{
-				var validIcon='<span class="glyphicon glyphicon-ok form-control-feedback"></span>';
-				$(element).parent().append(validIcon);
-			}
-		});
-
-		$.each(errorList, function (index, value) {
-			var element=$(value.element);
-			$('#'+value.element.id+'').attr('title',value.message).tooltip({
-				placement: 'bottom',
-				trigger: 'manual',
-				delay: { show: 500, hide: 5000 }
-			}).tooltip('show');
-			$(element).closest('.form-group').removeClass('has-success').addClass('has-error').addClass('has-feedback');
-			$(element).parent().find('span').remove();
-			if($(element).get(0).tagName!='SELECT')
-			{
-				var validIcon='<span class="glyphicon glyphicon-remove form-control-feedback"></span>';
-				$(element).parent().append(validIcon);
-			}
-		});
-	}
+	showErrors: scanErrorsForms
 });
 
 /* Enviar registro */
