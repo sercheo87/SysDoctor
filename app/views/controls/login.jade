@@ -7,13 +7,19 @@ block js
 		.form-group
 			label.col-sm-2.control-label(for='login_user') Usuario:
 			.col-sm-10
-				input#login_user.form-control(type='text', placeholder='Usuario', name='login_user')
+				.input-group
+					span.input-group-addon
+						i.fa.fa-user
+					input#login_user.form-control(type='text', placeholder='Usuario', name='login_user')
 		.form-group
 			label.col-sm-2.control-label(for='login_pass') Contraseña:
 			.col-sm-10
-				input#login_pass.form-control(type='password', placeholder='Contraseña', name='login_pass')
+				.input-group
+					span.input-group-addon
+						i.fa.fa-lock
+					input#login_pass.form-control(type='password', placeholder='Contraseña', name='login_pass')
 
 		.text-center
 			button#btSignIn.btn.btn-primary(type='button')
-				i.fa.fa-save
+				i.fa.fa-sign-in
 				|  Ingresar

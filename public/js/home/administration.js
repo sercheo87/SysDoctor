@@ -40,7 +40,7 @@ function ConfigureCalendar(data){
 			return e.title
 		},
 		events_source: function(){ return data;},
-		view: 'year',
+		view: 'month',
 		tmpl_path: '/js/tmpl/',
 		tmpl_cache: false,
 		day: moment().format('YYYY-MM-DD'),
@@ -60,8 +60,8 @@ function ConfigureCalendar(data){
 				if(val.class.indexOf('important')>=0) oClassIcon='danger';
 				console.log(val);
 				console.log(moment(val.start).format('MMMM Do YYYY, h:mm'));
-				oSpanIcon=$.validator.format(oSpanIcon,oClassIcon,moment(val.start).format('MMMM Do YYYY, h:mm') + ' ' + val.title +'<br>');
-				$(document.createElement('span')).html('<a href="' + val.url + '"> '+ oSpanIcon + ' <i class="fa fa-mobile"></i> '+ val.phone + '</a>').appendTo(list);
+				oSpanIcon=$.validator.format(oSpanIcon,oClassIcon,moment(val.start).format('MMMM Do YYYY, h:mm') + '<br>');
+				$(document.createElement('span')).html('<a href="' + val.url + '"> '+ oSpanIcon + ' <i class="fa fa-user"></i> ' + val.title + '- <i class="fa fa-mobile"></i> '+ val.phone + '</a>').appendTo(list);
 			});
 		},
 		onAfterViewLoad: function(view) {

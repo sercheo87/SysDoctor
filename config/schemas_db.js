@@ -54,7 +54,8 @@ sync.defineCollection('tbusers', {
 	datebirth: 	{ type: 'date', required: false, time: false },
 	state: 			{ type: 'boolean', required: true },
 	login: 			{ type: 'text', required: true },
-	pass: 			{ type: 'text', required: true }
+	pass: 			{ type: 'text', required: true },
+	rol: 				{ type: 'text', required: true}
 });
 
 sync.defineCollection('tbcivilstatus', {
@@ -77,13 +78,13 @@ sync.defineCollection('tbcity', {
 	country_id: 	{ type: 'number' },
 	description: 	{ type: 'text', required: true }
 });
-/*
+
 sync.defineCollection('tbmedicine', {
 	id: 								{ type: 'number', primary: true, serial: true },
-	groupmedicine_id: 	{ type: 'number' },
-	description: 				{ type: 'text', required: true }
+	medicinegroup_id: 	{ type: 'number' },
+	description: 				{ type: 'text', required: 'true' }
 });
-*/
+
 sync.defineCollection('tbgroupmedicine', {
 	id: 					{ type: 'number', primary: true, serial: true },
 	description: 	{ type: 'text', required: true }

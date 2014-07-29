@@ -7,7 +7,8 @@ var MdlUsers = db.define('tbusers', {
 	datebirth: 	{ type: 'date', required: 'false', time: false },
 	state: 			{ type: 'boolean', required: 'true' },
 	login: 			{ type: 'text', required: 'true' },
-	pass: 			{ type: 'text', required: 'true' }
+	pass: 			{ type: 'text', required: 'true' },
+	rol: 				{ type: 'text', required: true}
 }, {
 	id:'iduser'
 });

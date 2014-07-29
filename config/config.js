@@ -10,13 +10,13 @@ var config = {
 		},
 		port: 3000,
 		db: {
-			protocol : "mysql",
+			protocol : 'mysql',
 			query    : { pool: true },
-			host     : "localhost",
-			port     : "3306",
-			database : "dbsysdoctor",
-			user     : "root",
-			password : "administrator"
+			host     : 'localhost',
+			port     : '3306',
+			database : 'dbsysdoctor',
+			user     : 'root',
+			password : 'administrator'
 		}
 	},
 
@@ -27,13 +27,13 @@ var config = {
 		},
 		port: 3000,
 		db: {
-			protocol : "mysql",
+			protocol : 'mysql',
 			query    : { pool: true },
-			host     : "localhost",
-			port     : "3306",
-			database : "dbsysdoctor",
-			user     : "root",
-			password : "administrator"
+			host     : 'localhost',
+			port     : '3306',
+			database : 'dbsysdoctor',
+			user     : 'root',
+			password : 'administrator'
 		}
 	},
 
@@ -44,13 +44,13 @@ var config = {
 		},
 		port: 3000,
 		db: {
-			protocol : "mysql",
+			protocol : 'mysql',
 			query    : { pool: true },
-			host     : "localhost",
-			port     : "3306",
-			database : "dbsysdoctor",
-			user     : "root",
-			password : "administrator"
+			host     : 'localhost',
+			port     : '3306',
+			database : 'dbsysdoctor',
+			user     : 'root',
+			password : 'administrator'
 		}
 	}
 };

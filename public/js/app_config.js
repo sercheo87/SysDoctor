@@ -153,7 +153,7 @@ jQuery.fn.formatTable = function (options) {
 	tbody += $.validator.format('<tbody>{0}</tbody>',rows);
 
 	if(options.footer.show){
-		var pagerSize='<div id="footer" class="pull-right">';
+		var pagerSize='<div id="footer" class="pull-right hidden-xs">';
 		pagerSize+='<div class="btn-group btn-group-sm">';
 		pagerSize+=$.validator.format('<button type="button" class="btn btn-default" onclick="ChangePageSize(\'{0}\',{1})">{1}</button>',options.id,5);
 		pagerSize+=$.validator.format('<button type="button" class="btn btn-default" onclick="ChangePageSize(\'{0}\',{1})">{1}</button>',options.id,10);
@@ -263,12 +263,12 @@ var scanErrorsForms= function (errorMap, errorList) {
 		var element=$(value);
 		$('#'+value.id+'').tooltip('destroy');
 		$(element).closest('.form-group').removeClass('has-error').addClass('has-success').addClass('has-feedback');
-		$(element).parent().find('span').remove();
-		if($(element).get(0).tagName!='SELECT')
-		{
-			var validIcon='<span class="glyphicon glyphicon-ok form-control-feedback"></span>';
-			$(element).parent().append(validIcon);
-		}
+		//$(element).parent().find('span').remove();
+		//if($(element).get(0).tagName!='SELECT')
+		//{
+		//	var validIcon='<span class="glyphicon glyphicon-ok form-control-feedback"></span>';
+		//	$(element).parent().append(validIcon);
+		//}
 	});
 
 	$.each(errorList, function (index, value) {
@@ -279,12 +279,12 @@ var scanErrorsForms= function (errorMap, errorList) {
 			delay: { show: 500, hide: 5000 }
 		}).tooltip('show');
 		$(element).closest('.form-group').removeClass('has-success').addClass('has-error').addClass('has-feedback');
-		$(element).parent().find('span').remove();
-		if($(element).get(0).tagName!='SELECT')
-		{
-			var validIcon='<span class="glyphicon glyphicon-remove form-control-feedback"></span>';
-			$(element).parent().append(validIcon);
-		}
+		//$(element).parent().find('span').remove();
+		//if($(element).get(0).tagName!='SELECT')
+		//{
+		//	var validIcon='<span class="glyphicon glyphicon-remove form-control-feedback"></span>';
+		//	$(element).parent().append(validIcon);
+		//}
 	});
 }
 

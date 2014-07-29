@@ -33,6 +33,17 @@ var listMenu = [{
 		'text': 'Medicamentos 2',
 		'route': '/medicals'
 	}]
+},{
+	'id': 'Administration',
+	'text': 'Administracion',
+	'route': '/administration',
+	'icon':'key',
+	'description':'Administracion de Usuarios',
+	'items': [{
+		'id': 'usersadmin',
+		'text': 'Usuarios',
+		'route': '/users'
+	}]
 }];
 
 var dataInit={
