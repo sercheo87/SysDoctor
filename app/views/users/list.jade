@@ -1,0 +1,18 @@
+extends ../site
+
+block js
+	script(type='text/javascript', src='/js/users/list.js')
+
+block content
+	.theme-showcase(role='main')
+		.page-header
+			h1=title
+
+	.panel.panel-default
+		.panel-heading.clearfix
+			h4.panel-title.pull-left Usuarios del Sistema
+			.btn-group.btn-group-sm.pull-right
+				span#sppatientslist.btn.btn-default
+					i.fa.fa-filter
+		.panel-body
+			#ctnTblUsers.col-md-12

@@ -42,7 +42,7 @@ var listMenu = [{
 	'items': [{
 		'id': 'usersadmin',
 		'text': 'Usuarios',
-		'route': '/users'
+		'route': '/users/list'
 	}]
 }];
 

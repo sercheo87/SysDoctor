@@ -21,6 +21,10 @@ module.exports = function(app, data_init){
 	var receipts = require('../app/controllers/ctrl_receipts')
 	app.get('/receipt/inquiry/:idPatient', csrf,receipts.inquiry)
 
+	//Users
+	var users = require('../app/controllers/ctrl_users')
+	app.get('/users/list', csrf,users.list)
+	app.get('/users/add', csrf, users.add);
 
 
 	/* =========================== API ======================== */
@@ -42,7 +46,7 @@ module.exports = function(app, data_init){
 
 	// Users
 	var api_user=require('../app/apis/api_user');
-	app.get('/api/users', csrf, api_user.GetAllUsers);
+	app.get('/api/users/list', csrf, api_user.GetAllUsers);
 	app.get('/api/users/:login', api_user.GetUser);
 	app.post('/api/users/:login', api_user.GetUser);
 	app.get('/logout', function(req, res){
