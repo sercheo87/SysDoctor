@@ -23,6 +23,7 @@ require('./config/schemas_db')(orm);
 require('./config/express')(app, config, clientSessions);
 require('./config/routes')(app, data_init);
 //app.listen(config.port);
+
 var nicknames = {};
 /* Servidor de chat */
 var server = http.createServer(app).listen(config.port);
