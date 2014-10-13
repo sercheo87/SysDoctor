@@ -168,7 +168,6 @@ sync.defineCollection('tbdiet_detail', {
 					}],function(err,data){
 						if(err){
 							console.log(err);
-							res.send(500, {error: 'Error en establecimiento de Data por Default'});
 						}
 					});
 
@@ -182,7 +181,6 @@ sync.defineCollection('tbdiet_detail', {
 					}],function(err,data){
 						if(err){
 							console.log(err);
-							res.send(500, {error: 'Error en establecimiento de Data por Default'});
 						}
 					});
 
@@ -203,7 +201,6 @@ sync.defineCollection('tbdiet_detail', {
 						],function(err,data){
 							if(err){
 								console.log(err);
-								res.send(500, {error: 'Error en establecimiento de Data por Default'});
 							}
 						});
 				}
@@ -223,7 +220,6 @@ sync.defineCollection('tbdiet_detail', {
 						],function(err,data){
 							if(err){
 								console.log(err);
-								res.send(500, {error: 'Error en establecimiento de Data por Default'});
 							}
 						});
 				}
@@ -243,7 +239,6 @@ sync.defineCollection('tbdiet_detail', {
 						],function(err,data){
 							if(err){
 								console.log(err);
-								res.send(500, {error: 'Error en establecimiento de Data por Default'});
 							}
 						});
 				}
@@ -260,7 +255,6 @@ sync.defineCollection('tbdiet_detail', {
 						],function(err,data){
 							if(err){
 								console.log(err);
-								res.send(500, {error: 'Error en establecimiento de Data por Default'});
 							}
 						});
 				}
