@@ -1,0 +1,99 @@
+script(type='text/javascript', src='/js/patients/personal_info.js')
+
+.form-group
+	label.col-sm-2(for='txpatientsname') Nombre
+	.col-sm-10
+		input#txpatientsname.form-control.spaced-alphabetic(type='text', placeholder='Nombres del Paciente',name='txpatientsname')
+.form-group
+	label.col-sm-2(for='txpatientslastname') Apellidos
+	.col-sm-10
+		input#txpatientslastname.form-control.spaced-alphabetic(type='text', placeholder='Apellidos del Paciente',name='txpatientslastname')
+.form-group
+	label.col-sm-2(for='txpatientsbirthday') Fecha de Nacimiento
+	.col-sm-10
+		input.form-control.spaced-alphabetic(type='date', name='txpatientsbirthday')
+//		#datetimepicker4.input-group
+//			input#txpatientsbirthday.form-control.spaced-alphabetic(data-format='yyyy-MM-dd', type='text', name='txpatientsbirthday')
+//			span.input-group-addon
+//				i.fa.fa-calendar
+//script(type='text/javascript')
+//	$(function() {
+//	$('#datetimepicker4').datetimepicker({
+//	pickTime: false
+//	});
+//	});
+.form-group
+	label.col-sm-2(for='txpatientsidentification') Identificacion
+	.col-sm-10
+		input#txpatientsidentification.form-control.integer(type='text', placeholder='Identificacion',name='txpatientsidentification')
+.form-group
+	label.col-sm-2(for='slpatientscivilstatus') Estado Civil
+	.col-sm-10
+		select#slpatientscivilstatus.form-control(data-live-search='true', placeholder='Estado Civil',name='slpatientscivilstatus')
+.form-group
+	label.col-sm-2(for='slpatientssex') Sexo
+	.col-sm-10
+		select#slpatientssex.form-control(data-live-search='true', placeholder='Sexo',name='slpatientssex')
+			option(value='M') Masculino
+			option(value='F') Femenino
+			option(value='O') Otro
+.form-group
+	label.col-sm-2(for='slpatientsprofession') Profesion
+	.col-sm-10
+		select#slpatientsprofession.form-control(data-live-search='true', placeholder='Profesion',name='slpatientsprofession')
+
+.form-group
+	legend Direcciones
+.form-group
+	label.col-sm-2(for='slpatientscountry') Pais
+	.col-sm-10
+		select#slpatientscountry.form-control( placeholder='Pais',name='slpatientscountry')
+.form-group
+	label.col-sm-2(for='slpatientscity') Ciudad
+	.col-sm-10
+		select#slpatientscity.form-control( data-size='false', placeholder='Ciudad', name='slpatientscity')
+.form-group
+	label.col-sm-2(for='txpatientsaddress') Direccion
+	.col-sm-10
+		input#txpatientsaddress.form-control.spaced-alphanumeric(type='text', placeholder='Direccion',name='txpatientsaddress')
+.form-group
+	label.col-sm-2(for='txbirthplace') Lugar de Nacimiento
+	.col-sm-10
+		input#txbirthplace.form-control.spaced-alphanumeric(type='text', placeholder='Direccion',name='txbirthplace')
+
+.form-group
+	legend Contacto de Emergencia
+.form-group
+	label.col-sm-2(for='txEmergencyName') Nombres
+	.col-sm-10
+		input#txEmergencyName.form-control.spaced-alphanumeric(type='text', placeholder='Nombres',name='txEmergencyName')
+.form-group
+	label.col-sm-2(for='slEmergencyKin') Parentesco
+	.col-sm-10
+		select#slEmergencyKin.form-control(data-live-search='true', placeholder='Parentesco',name='slEmergencyKin')
+			option(value='0') Madre
+			option(value='1') Padre
+			option(value='2') Amiga(o)
+			option(value='3') Tia(o)
+			option(value='4') Sobrina(o)
+			option(value='5') Prima(o)
+			option(value='6') Otro
+.form-group
+	label.col-sm-2(for='txEmergencyPhone') Telefono
+	.col-sm-10
+		input#txEmergencyPhone.form-control.integer(type='text', placeholder='Telefono',name='txEmergencyPhone')
+
+.form-group
+	legend Informacion de Contacto
+.form-group
+	label.col-sm-2(for='txpatientsphone') Telefono
+	.col-sm-10
+		input#txpatientsphone.form-control.integer(type='tel', placeholder='Telefono',name='txpatientsphone')
+.form-group
+	label.col-sm-2(for='txpatientsemail') Email
+	.col-sm-10
+		input#txpatientsemail.form-control.email(type='email', placeholder='Email',name='txpatientsemail')
+
+.well.well-sm.text-center
+	a#btCancelPatient.btn.btn-default(type='button') Cancelar
+	a#btAddPatient.btn.btn-primary(type='button') Grabar

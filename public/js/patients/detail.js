@@ -128,15 +128,27 @@ $.ajax({
 	success: function(data) {
 		if(data.success){
 			DATA_PATIENT=data.data[0];
+			console.log('paciente:',DATA_PATIENT);
+			$('#txpatientsname').val(DATA_PATIENT.name);
+			$('#txpatientslastname').val(DATA_PATIENT.last_name);
+			$('#txpatientsidentification').val(DATA_PATIENT.identification);
+			$('#slpatientssex').val(DATA_PATIENT.sex);
+			$('#slpatientscivilstatus').val(DATA_PATIENT.id_civil_status);
+			$('#slpatientsprofession').val(DATA_PATIENT.id_profession);
+			$('#txpatientsaddress').val(DATA_PATIENT.address);
+			$('#txbirthplace').val(DATA_PATIENT.birthplace);
+			$('#txEmergencyName').val(DATA_PATIENT.emergency_name);
+			$('#slEmergencyKin').val(DATA_PATIENT.emergency_kin);
+			$('#txEmergencyPhone').val(DATA_PATIENT.emergency_phone);
+			$('#txpatientsphone').val(DATA_PATIENT.phone);
+			$('#txpatientsemail').val(DATA_PATIENT.email);
 
-			$('#pName').text(data.data[0].name);
-			$('#pJob').text(data.data[0].ocupation);
-			$('#pYearsOld').text(calcularEdad(data.data[0].birthday.substring(0,10)));
-			$('#pSex').text(data.data[0].sex);
-			$('#tx_patient').val(data.data[0].id_patient);
-			id_patient=data.data[0].id_patient;
+			$('#pJob').text(DATA_PATIENT.ocupation);
+			$('#pYearsOld').text(calcularEdad(DATA_PATIENT.birthday.substring(0,10)));
+			$('#pSex').text(DATA_PATIENT.sex);
+			id_patient=DATA_PATIENT.id_patient;
 
-			dietIdRegister=data.data[0].id_patient;
+			dietIdRegister=DATA_PATIENT.id_patient;
 			GetMedicalInformation()
 				//Cargar Dietas
 				listDietDetail(dietIdRegister);
