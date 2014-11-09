@@ -38,11 +38,11 @@ var listMenu = [{
 	'text': 'Administracion',
 	'route': '/administration',
 	'icon':'key',
-	'description':'Administracion de Usuarios',
+	'description':'Administracion',
 	'items': [{
-		'id': 'usersadmin',
-		'text': 'Usuarios',
-		'route': '/users/list'
+		'id': 'admin_city',
+		'text': 'Paises',
+		'route': '/administration/city'
 	}]
 }];
 

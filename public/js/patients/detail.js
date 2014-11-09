@@ -142,6 +142,11 @@ $.ajax({
 			$('#txEmergencyPhone').val(DATA_PATIENT.emergency_phone);
 			$('#txpatientsphone').val(DATA_PATIENT.phone);
 			$('#txpatientsemail').val(DATA_PATIENT.email);
+			
+			var x=moment(DATA_PATIENT.birthday);
+			//$('#txpatientsbirthday').val(x.format('DD/MM/YYYY'));
+			$('#txpatientsbirthday').datepicker('update','2011-03-05');
+			console.log('>>>>>>>>>>>>>>>>>>.',x.format('DD/MM/YYYY'));
 
 			$('#pJob').text(DATA_PATIENT.ocupation);
 			$('#pYearsOld').text(calcularEdad(DATA_PATIENT.birthday.substring(0,10)));

@@ -10,6 +10,7 @@ module.exports = function(app, data_init){
 	// Administracion
 	var administration = require('../app/controllers/ctrl_administration');
 	app.get('/administration', csrf, administration.index);
+	app.get('/administration/city', csrf, administration.city);
 
 	// Patients
 	var patients = require('../app/controllers/ctrl_patients');
@@ -18,14 +19,13 @@ module.exports = function(app, data_init){
 	app.get('/patients/detail/:identification', csrf, patients.detail);
 
 	//Reports
-	var receipts = require('../app/controllers/ctrl_receipts')
-	app.get('/receipt/inquiry/:idPatient', csrf,receipts.inquiry)
+	var receipts = require('../app/controllers/ctrl_receipts');
+	app.get('/receipt/inquiry/:idPatient', csrf,receipts.inquiry);
 
 	//Users
-	var users = require('../app/controllers/ctrl_users')
-	app.get('/users/list', csrf,users.list)
+	var users = require('../app/controllers/ctrl_users');
+	app.get('/users/list', csrf,users.list);
 	app.get('/users/add', csrf, users.add);
-
 
 	/* =========================== API ======================== */
 	// Menu

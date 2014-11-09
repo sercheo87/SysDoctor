@@ -1,0 +1,87 @@
+extends ../site
+
+block js
+	script(type='text/javascript', src='/js/administration/city.js')
+
+block content
+	.theme-showcase(role='main')
+		.page-header
+			h1=title
+
+	.panel.panel-default
+		.panel-heading.clearfix
+			h4.panel-title.pull-left Catalogos de Paises
+			.btn-group.btn-group-sm.pull-right
+
+		.panel-body
+			#ctnTblPatients.col-md-12
+
+				form#frmCity.form-horizontal(role='form',method='post')
+					.form-group
+						label.col-sm-2.control-label(for='slCity') Pais
+						.col-sm-8
+							select#slCity.form-control(data-live-search='true', placeholder='Seleccione Pais',name='slCity')
+						.col-sm-2
+							.btn-group
+								button#btAddCity.btn.btn-default(type='button', data-toggle='modal', data-target='#mdlCity')
+									i.fa.fa-plus
+								button#btEditCity.btn.btn-default(type='button', data-toggle='modal', data-target='#mdlCity')
+									i.fa.fa-edit
+
+					.form-group
+						label.col-sm-2.control-label(for='slCountry') Ciudad
+						.col-sm-8
+							select#slCountry.form-control(data-live-search='true', placeholder='Seleccione Ciudad',name='slCountry')
+						.col-sm-2
+							.btn-group
+								button#btAddCountry.btn.btn-default(type='button', data-toggle='modal', data-target='#mdlCountry')
+									i.fa.fa-plus
+								button#btEditCountry.btn.btn-default(type='button', data-toggle='modal', data-target='#mdlCountry')
+									i.fa.fa-edit
+
+	.panel.panel-default
+		.panel-heading.clearfix
+			h4.panel-title.pull-left Listado de Pacientes
+			.btn-group.btn-group-sm.pull-right
+				span#sppatientslist.btn.btn-default
+					i.fa.fa-filter
+		.panel-body
+			#ctnTblCountry.col-md-6
+			#ctnTblCity.col-md-6
+
+					#mdlCity.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabelCity', aria-hidden='true')
+						.modal-dialog
+							.modal-content
+								.modal-header
+									button.close(type='button', data-dismiss='modal')
+										span(aria-hidden='true') ×
+										span.sr-only Close
+									h4#myModalLabelCity.modal-title Informacion de Pais
+								.modal-body
+									#panel-city.form-group
+											label.col-sm-2.control-label(for='txCity') Pais
+											.col-sm-10
+												input#txCity.form-control(type='text')
+								.modal-footer
+									button.btn.btn-default(type='button', data-dismiss='modal') Cancelar
+										i.fa.fa-save
+									button.btn.btn-primary(type='button') Grabar
+										i.fa.fa-plus
+
+
+					#mdlCountry.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabelCountry', aria-hidden='true')
+						.modal-dialog
+							.modal-content
+								.modal-header
+									button.close(type='button', data-dismiss='modal')
+										span(aria-hidden='true') ×
+										span.sr-only Close
+									h4#myModalLabelCountry.modal-title Informacion de Ciudad
+								.modal-body
+									#panel-country.form-group
+											label.col-sm-2.control-label(for='txCountry') Ciudad
+											.col-sm-10
+												input#txCountry.form-control(type='text')
+								.modal-footer
+									button.btn.btn-default(type='button', data-dismiss='modal') Cancelar
+									button.btn.btn-primary(type='button') Grabar
