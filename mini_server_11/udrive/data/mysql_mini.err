@@ -1,0 +1,22 @@
+141013 14:51:20 [Note] \bin\mysqld-opt.exe: ready for connections.
+Version: '5.0.67-community-nt'  socket: ''  port: 3311  MySQL Community Edition (GPL)
+141013 15:02:23 [Note] \bin\mysqld-opt.exe: Normal shutdown
+
+141013 15:02:25 [Warning] \bin\mysqld-opt.exe: Forcing close of thread 37  user: 'root'
+
+141013 15:02:25 [Warning] \bin\mysqld-opt.exe: Forcing close of thread 36  user: 'root'
+
+141013 15:02:25 [Warning] \bin\mysqld-opt.exe: Forcing close of thread 35  user: 'root'
+
+141013 15:02:25 [Warning] \bin\mysqld-opt.exe: Forcing close of thread 34  user: 'root'
+
+141013 15:02:25 [Warning] \bin\mysqld-opt.exe: Forcing close of thread 33  user: 'root'
+
+141013 15:02:25 [Warning] \bin\mysqld-opt.exe: Forcing close of thread 32  user: 'root'
+
+141013 15:02:25 [Warning] \bin\mysqld-opt.exe: Forcing close of thread 31  user: 'root'
+
+141013 15:02:25 [Warning] \bin\mysqld-opt.exe: Forcing close of thread 30  user: 'root'
+
+141013 15:02:25 [Note] \bin\mysqld-opt.exe: Shutdown complete
+
