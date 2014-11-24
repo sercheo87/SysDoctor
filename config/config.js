@@ -13,10 +13,10 @@ var config = {
 			protocol : 'mysql',
 			query    : { pool: true },
 			host     : 'localhost',
-			port     : '3311',
+			port     : '3306',
 			database : 'dbsysdoctor',
 			user     : 'root',
-			password : 'root'
+			password : 'administrator'
 		}
 	},
 

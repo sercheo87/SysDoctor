@@ -2,31 +2,6 @@ var express = require('express');
 
 module.exports = function(app, data_init){
 
-	/* ========================== ROUTE ====================== */
-	//home route
-	var home = require('../app/controllers/ctrl_home');
-	app.get('/',home.index);
-
-	// Administracion
-	var administration = require('../app/controllers/ctrl_administration');
-	app.get('/administration', csrf, administration.index);
-	app.get('/administration/city', csrf, administration.city);
-
-	// Patients
-	var patients = require('../app/controllers/ctrl_patients');
-	app.get('/patients/add', csrf, patients.add);
-	app.get('/patients/list', csrf, patients.list);
-	app.get('/patients/detail/:identification', csrf, patients.detail);
-
-	//Reports
-	var receipts = require('../app/controllers/ctrl_receipts');
-	app.get('/receipt/inquiry/:idPatient', csrf,receipts.inquiry);
-
-	//Users
-	var users = require('../app/controllers/ctrl_users');
-	app.get('/users/list', csrf,users.list);
-	app.get('/users/add', csrf, users.add);
-
 	/* =========================== API ======================== */
 	// Menu
 	app.post('/api/menu', function(req, res) {
@@ -75,6 +50,9 @@ module.exports = function(app, data_init){
 
 	// City
 	var api_city=require('../app/apis/api_city');
+	app.get('/api/city/:id', csrf, api_city.getCityRecord);
+	app.put('/api/city/:id', csrf, api_city.addCityRecord);
+	app.del('/api/city/:id', csrf, api_city.removeCityRecord);
 	app.get('/api/city/list/:id', csrf, api_city.GetAllItems);
 
 	// Medical Record
@@ -107,6 +85,31 @@ module.exports = function(app, data_init){
 	app.get('/api/diet/detail/list/:idMedical', csrf, api_diet_detail.getAllDiet_GroupList);
 	app.del('/api/diet/remove/:idEvent', csrf, api_diet_detail.removeDiet_Group);
 
+	/* ========================== ROUTE ====================== */
+	//home route
+	var home = require('../app/controllers/ctrl_home');
+	app.get('/',home.index);
+
+	// Administracion
+	var administration = require('../app/controllers/ctrl_administration');
+	app.get('/administration', csrf, administration.index);
+	app.get('/administration/city', csrf, administration.city);
+
+	// Patients
+	var patients = require('../app/controllers/ctrl_patients');
+	app.get('/patients/add', csrf, patients.add);
+	app.get('/patients/list', csrf, patients.list);
+	app.get('/patients/detail/:identification', csrf, patients.detail);
+
+	//Reports
+	var receipts = require('../app/controllers/ctrl_receipts');
+	app.get('/receipt/inquiry/:idPatient', csrf,receipts.inquiry);
+
+	//Users
+	var users = require('../app/controllers/ctrl_users');
+	app.get('/users/list', csrf,users.list);
+	app.get('/users/add', csrf, users.add);
+	
 	app.all('*', function(req, res){
 		res.send(404);
 	})
